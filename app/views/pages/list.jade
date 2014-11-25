@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      table.table.table-hover.table-bordered
+        thead
+          tr
+            th category
+            th course name
+            th instructor
+            th country
+            th create year
+            th upload time
+            th pv
+            th lookup
+            th edit
+            th delete
+        tbody
+          each item in movies
+            tr(class="item-id-#{item._id}")
+              td #{item.category.name}
+              td #{item.title}
+              td #{item.doctor}
+              td #{item.country}
+              td #{item.year}
+              td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+              td #{item.pv}
+              td: a(target="_blank", href="/movie/#{item._id}") lookup
+              td: a(target="_blank", href="/admin/movie/update/#{item._id}") edit
+              td
+                button.btn.btn-danger.del(type="button", data-id="#{item._id}") delete
+  script(src="/js/admin.js")

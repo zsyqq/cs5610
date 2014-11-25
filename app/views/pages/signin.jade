@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .col-md-5
+        form(method="POST", action="/user/signin")
+          .modal-body
+            .form-group
+              label(for="signinName") Account
+              input#signinName.form-control(name="user[name]", type="text")
+            .form-group
+              label(for="signinPassword") Password
+              input#signinPassword.form-control(name="user[password]", type="text")
+          .modal-footer
+            button.btn.btn-default(type="button", data-dismiss="modal") Close
+            button.btn.btn-success(type="submit") Submit
