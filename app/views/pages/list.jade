@@ -8,10 +8,10 @@ block content
           tr
             th category
             th course name
-            th instructor
-            th country
+            //- th channelTitle
+            
             th create year
-            th upload time
+            th modified time
             th pv
             th lookup
             th edit
@@ -21,8 +21,8 @@ block content
             tr(class="item-id-#{item._id}")
               td #{item.category.name}
               td #{item.title}
-              td #{item.doctor}
-              td #{item.country}
+              //- td #{item.doctor}
+              
               td #{item.year}
               td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
               td #{item.pv}

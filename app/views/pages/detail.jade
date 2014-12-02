@@ -4,7 +4,8 @@ block content
   .container
     .row
       .col-md-7
-        embed(src="#{movie.flash}", allowFullScreen="true", quality="high", width="720", height="600", align="middle", allowScriptAcess="always", type="application/x-shockwave-flash")
+        //- embed(src="#{movie.flash}", allowFullScreen="true", quality="high", width="720", height="600", align="middle", allowScriptAcess="always", type="application/x-shockwave-flash")
+        #video(data-vflash='#{movie.flash}')
         .panel.panel-defatul
           .panel-heading
             h3 Comment
@@ -24,7 +25,7 @@ block content
                           .pull-left
                             a.comment(href="#comments", data-cid="#{item._id}", data-tid="#{reply.from._id}")
                               img.media-object(src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+", style="width: 64px; height: 64px;")
-                          .media-body
+                         .media-body
                             h4.media-heading
                               | #{reply.from.name}
                               span.text-info &nbsp;reply&nbsp;
@@ -44,16 +45,57 @@ block content
                   a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
       .col-md-5
         .dl-horizontal
+          form(method='POST', action='/movie/like')
+            if user 
+              input(type='hidden', name='uid', value=user._id)
+              input(type='hidden', name='mid', value=movie._id)
+              button(type='submit') favorite
+            else
+              a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
           dt Course Name
           dd= movie.title
-          dt Instructor
-          dd= movie.doctor
-          dt Country
-          dd= movie.country
-          dt Language
-          dd= movie.language
+
+          //- dt Instructor
+          //- dd= movie.doctor
+          //- dt Country
+          //- dd= movie.country
+          //- dt Language
+          //- dd= movie.language
           dt Create Year
           dd= movie.year
           dt Introduction
           dd= movie.summary
+          dt Viewers on youtube
+          dd=movie.viewrate
+          dt favorite on youtube
+          dd=movie.favrate
+          dt likes on youtube
+          dd=movie.likerate
+          dt dislike on youtube
+          dd=movie.dislrate
   script(src="/build/detail.min.js")
+  script.
+    $(function(){
+      var target=$('#video');
+      var videoid = target.data('vflash')
+      var matches = videoid.match(/^http:\/\/www\.youtube\.com\/.*[?&]v=([^&]+)/i) || videoid.match(/^http:\/\/youtu\.be\/([^?]+)/i);
+        if (matches) {
+          videoid = matches[1];
+        }
+        //- if (videoid.match(/^[a-z0-9_-]{11}$/i) === null) {
+        //-   $("<p style='color: #F00;'>Unable to parse Video ID/URL.</p>").appendTo("#video-data-1");
+        //-   return;
+        //- }
+        swfobject.embedSWF(
+          "http://www.youtube.com/v/"+ videoid+"?enablejsapi=1&rel=0&fs=1",
+          "video",
+          "600",
+          "500",
+          "10.1",
+          false,
+          false,
+          { allowScriptAccess: "always", allowFullScreen: "true" },
+          { id: "video" }
+        )
+      })
+    

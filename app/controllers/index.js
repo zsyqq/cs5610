@@ -64,6 +64,7 @@ exports.search = function(req, res) {
           console.log(err)
         }
         var results = movies.slice(index, index + count)
+        console.log(results)
 
         res.render('results', {
           title: 'Search Resutl',

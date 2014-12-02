@@ -1,5 +1,8 @@
 var mongoose = require('mongoose')
 var User = mongoose.model('User')
+var Follow = mongoose.model('Follow')
+var Movie = mongoose.model('Movie')
+
 
 // signup
 exports.showSignup = function(req, res) {
@@ -13,6 +16,8 @@ exports.showSignin = function(req, res) {
     title: 'Login'
   })
 }
+
+
 
 exports.signup = function(req, res) {
   var _user = req.body.user
@@ -64,6 +69,7 @@ exports.signin = function(req, res) {
         return res.redirect('/')
       }
       else {
+        console.log('passowrd is incorrect!')
         return res.redirect('/signin')
       }
     })
@@ -91,6 +97,78 @@ exports.list = function(req, res) {
     })
   })
 }
+
+// profile page
+exports.showInfo = function(req,res) {
+  var id = req.params.id 
+  User.update({_id : id},{$inc:{pv:1}}, function(err){
+    if (err) {
+      console.log(err)
+    }
+  })
+
+  User
+  .findOne({_id : id})
+  .populate('favmv','name') 
+  .exec(function(err,to){
+    var favmvs = to.favmv || []
+    console.log(favmvs.name);
+
+    Follow
+    .find({person:id})
+    .populate('follows','name _id')
+    .populate('befollows','name _id')
+    .exec(function(err,follow){
+
+      if (err) {console.log(err);}
+
+      var follow  = follow[0] || {}
+      var follows = follow.follows || []
+      var befollows = follow.befollows || []
+      // console.log(follows);
+
+
+      res.render('profile',{
+        title: 'profile', 
+        to : to, 
+        follows : follows, 
+        befollows : befollows, 
+        movies : favmvs, 
+      })
+
+    })
+  })
+}
+
+
+exports.favmv = function(req,res){
+  var mid = req.body.mid
+  
+  var userid = req.body.uid
+  console.log(userid);
+
+  Movie.findById(mid,function(err,movie){
+    if (movie.belike.indexOf(userid)<0){
+      movie.belike.push(userid)
+      movie.save(function(err,movie){
+      if (err) {console.log(err);}
+      User.findById(userid,function(err,user){
+        
+        if (err) {console.log(err);}
+        user.favmv.push(mid)
+        user.save(function(err,user){
+          if (err) {console.log(err)}
+          res.redirect('/movie/'+mid)
+        })
+      })
+    })
+    }
+    else {
+      res.redirect('/movie/'+mid)
+    }    
+  })
+}
+
 
 // midware for user
 exports.signinRequired = function(req, res, next) {

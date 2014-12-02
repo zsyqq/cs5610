@@ -1,6 +1,8 @@
 var mongoose = require('mongoose')
 var bcrypt = require('bcrypt')
 var SALT_WORK_FACTOR = 10
+var Schema = mongoose.Schema
+var ObjectId = Schema.Types.ObjectId
 
 var UserSchema = new mongoose.Schema({
   name: {
@@ -13,10 +15,13 @@ var UserSchema = new mongoose.Schema({
   // 2: professonal user
   // >10: admin
   // >50: super admin
+  pv : Number,
+
   role: {
     type: Number,
     default: 0
   },
+  picture : String,
   meta: {
     createAt: {
       type: Date,
