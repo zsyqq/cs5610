@@ -1,19 +1,7 @@
-.container
-  .row
-    .page-header.clearfix
-      h1= title
-      .col-md-4
-        small Web Development Learning
-      .col-md-8
-        form(method='GET', action='/results')
-          .input-group.col-sm-4.pull-right
-            input.form-control(type='text', name='q')
-            span.input-group-btn
-              button.btn.btn-default(type='submit') Search
 .navbar.navbar-default.navbar-fixed-bottom
   .container
     .navbar-header
-      a.navbar-brand(href="/") Web Development Learning
+      a.navbar-brand(href="/") Web-Learn
     if user
       p.navbar-text.navbar-right
         span Welcome,#{user.name}

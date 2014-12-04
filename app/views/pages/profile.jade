@@ -23,17 +23,33 @@ block content
 		else 
 			p No followers
 		h2 Favorite course video :
+		if movies.length>0
+			each m in movies
+				a(href='/movie/#{m._id}')
+					img(src='#{m.poster}')
+					p &nbsp;#{m.title} &nbsp;
+		else 
+			p No Course Video
+		
 
-		each m in movies
-			a(href='/movie/#{m._id}')
-				span &nbsp;#{m.name} &nbsp;
+		if f.indexOf(user._id)<0
+			form(method='POST',action="/user/follow")
+				if user 
+					input(type='hidden',name='uid', value=user._id)
+					input(type='hidden',name='fid', value=to._id)
+					button.btn.btn-primary(type='submit') Follow 
+				else 
+					a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
+		else
+			form(method='POST',action="/user/unfollow")
+				if user 
+					input(type='hidden',name='uid', value=user._id)
+					input(type='hidden',name='fid', value=to._id)
+					button.btn.btn-primary(type='submit') UnFollow 
+				else 
+					a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
 
 
-
-		form(method='POST',action="/user/follow")
-			if user 
-				input(type='hidden',name='uid', value=user._id)
-				input(type='hidden',name='fid', value=to._id)
-				button.btn.btn-primary(type='submit') Like 
-			else 
-				a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
+		br 
+		br 
+		hr

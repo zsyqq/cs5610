@@ -3,6 +3,9 @@ var User = require('../app/controllers/user')
 var Movie = require('../app/controllers/movie')
 var Comment = require('../app/controllers/comment')
 var Category = require('../app/controllers/category')
+var Follow = require('../app/controllers/follow')
+var Favmv = require('../app/controllers/favmv')
+
 
 module.exports = function(app) {
 
@@ -21,6 +24,7 @@ module.exports = function(app) {
   // User
   app.post('/user/signup', User.signup)
   app.post('/user/signin', User.signin)
+  app.get('/user/:id',User.showInfo)
   app.get('/signin', User.showSignin)
   app.get('/signup', User.showSignup)
   app.get('/logout', User.logout)
@@ -33,6 +37,12 @@ module.exports = function(app) {
   app.post('/admin/movie', User.signinRequired, User.adminRequired, Movie.savePoster, Movie.save)
   app.get('/admin/movie/list', User.signinRequired, User.adminRequired, Movie.list)
   app.delete('/admin/movie/list', User.signinRequired, User.adminRequired, Movie.del)
+  app.post('/movie/like',Favmv.favmv)
+  app.post('/movie/unlike',User.signinRequired,Favmv.unlike)
+  app.get('/user/edit/:id', User.signinRequired, User.edit)
+  app.post('/user/edit', User.signinRequired, User.infosave)
+
+
 
   // Comment
   app.post('/user/comment', User.signinRequired, Comment.save)
@@ -41,7 +51,13 @@ module.exports = function(app) {
   app.get('/admin/category/new', User.signinRequired, User.adminRequired, Category.new)
   app.post('/admin/category', User.signinRequired, User.adminRequired, Category.save)
   app.get('/admin/category/list', User.signinRequired, User.adminRequired, Category.list)
-
+  
+  //follow
+  app.post('/user/follow',User.signinRequired, Follow.like)
+  app.post('/user/unfollow',User.signinRequired, Follow.unlike)
   // results
-  app.get('/results', Index.search)
+  app.get('/results', Index.index)
 }
+
+
+  

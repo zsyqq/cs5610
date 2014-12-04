@@ -5,7 +5,7 @@ var Comment = mongoose.model('Comment')
 var _ = require('underscore')
 var fs = require('fs')
 var path = require('path')
-
+var Favmv = mongoose.model('Favmv')
 // detail page
 exports.detail = function(req, res) {
   var id = req.params.id

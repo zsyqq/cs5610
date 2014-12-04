@@ -16,12 +16,14 @@ var UserSchema = new mongoose.Schema({
   // >10: admin
   // >50: super admin
   pv : Number,
-
+  interest:String,
   role: {
     type: Number,
     default: 0
   },
-  picture : String,
+  poster : {type:String,default:''},
+  intro:{type:String,default:'Empty Now'},
+
   meta: {
     createAt: {
       type: Date,

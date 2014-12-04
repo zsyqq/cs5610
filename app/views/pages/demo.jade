@@ -1,0 +1,160 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Inspiration for Article Intro Effects | Demo 6
+    link(href="/libs/bootstrap/dist/css/bootstrap.min.css", rel="stylesheet")
+    script(src="/libs/jquery/dist/jquery.min.js")
+    script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
+    script(src="/build/index.css")
+    script(src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js")
+    link(rel="stylesheet", type="text/css", href="/css/normalize.css")
+    link(rel="stylesheet", type="text/css", href="/css/demo.css")
+    link(rel="stylesheet", type="text/css", href="/css/component.css")
+    link(rel="stylesheet", type="text/css", href="/css/style4.css")
+    link(rel="stylesheet", type="text/css", href="/css/style3.css")
+    script(type="text/javascript", src="/js/modernizr.custom.86080.js")
+    script(src="http://html5shiv.googlecode.com/svn/trunk/html5.js")
+    link(rel="stylesheet", type="text/css", href="/css/search.css")
+ 
+
+  body.demo-6
+
+
+    #d_container.d_container.intro-effect-grid
+      
+      header.header
+        ul.grid
+          li
+            h2 Javascript
+          li
+            h2 jQuery
+          li
+            h2 ASP.NET
+          li
+            h2 NodeJS
+          li
+            h2 MongoDB
+          li
+            h2 AngularJS
+        .bg-img
+          ul.cb-slideshow
+            li
+              span Image 01
+              div
+                h3 Javascript
+            li
+              span Image 02
+              div
+                h3 jQuery
+            li
+              span Image 03
+              div
+                h3 HTML5
+            li
+              span Image 04
+              div
+                h3 NodeJS
+            li
+              span Image 05
+              div
+                h3 AngularJS
+            li
+              span Image 06
+              div
+                h3 CSS
+        .title
+    
+          h1 Start Learn
+          p.subline Inspiration for Web Development
+          p
+            | by
+            strong Shuyi Zhang
+            | &#8212; Posted in
+            strong Inspiration
+            | on
+            strong May 21, 2014
+          p
+            a.current-demo(href="#slide-main") Course Menu
+      button.trigger(data-info="Click to see more")
+        span Trigger
+ 
+      section.cn-container
+        #slide-main.cn-slide
+          h2 Courses
+          nav
+            each cat in categories
+              a(href="#slide-#{cat.name}", style='background:url(/img/#{categories.indexOf(cat)+1}.jpg) no-repeat center center') #{cat.name}
+          
+             
+         
+        each cat in categories
+          .cn-slide.cn-slide-sub(id='slide-'+ cat.name)
+            h2 #{cat.name}
+            a.cn-back(href="#slide-main") Back
+            nav
+              if cat.movies && cat.movies.length>0
+                each mv in cat.movies 
+                  a(href="#slide-#{cat.name}-#{mv._id}")
+                    img(src="#{mv.poster}", alt="#{mv.title}")
+                  p #{mv.title}
+        each cat in categories
+          if cat.movies && cat.movies.length>0
+            each mv in cat.movies
+              .cn-slide(id='slide-'+cat.name+'-'+mv._id)
+                p #{mv.title}
+                a.cn-back(href="#slide-#{cat.name}") Back
+                .cn-content(style="background:#80B8CE url(#{mv.poster}) no-repeat center center")
+                  p #{mv.summary}
+
+      include ../includes/header
+      #morphsearch.morphsearch
+        form.morphsearch-form(method='GET',action="/results")
+          input.morphsearch-input(type="text", placeholder="Search...",name='q')
+          button.morphsearch-submit(type="submit") Search
+        .morphsearch-content
+          .dummy-column
+            h2 Skills
+            a.dummy-media-object(href="https://developer.mozilla.org/en-US/docs/Web/JavaScript",target='_blank')
+              h3 Javascript Doc
+            a.dummy-media-object(href="http://jquery.com/",target='_blank')
+              h3 jQuery Doc
+            a.dummy-media-object(href="http://nodejs.org/",target='_blank')
+              img.round(src="http://0.gravatar.com/avatar/06458359cb9e370d7c15bf6329e5facb?s=50&d=identicon&r=G", alt="Peter Finlan")
+              h3 NodeJS
+            a.dummy-media-object(href="http://www.mongodb.com/",target='_blank')
+              img.round(src="http://1.gravatar.com/avatar/db7700c89ae12f7d98827642b30c879f?s=50&d=identicon&r=G", alt="Patrick Cox")
+              h3 MongoDB
+            a.dummy-media-object(href="https://angularjs.org/",target='_blank')
+              img.round(src="http://0.gravatar.com/avatar/cb947f0ebdde8d0f973741b366a51ed6?s=50&d=identicon&r=G", alt="Tim Holman")
+              h3 AngularJS
+            a.dummy-media-object(href="http://www.w3schools.com",target='_blank')
+              img.round(src="http://1.gravatar.com/avatar/9bc7250110c667cd35c0826059b81b75?s=50&d=identicon&r=G", alt="Shaun Dona")
+              h3 w3schools
+          .dummy-column
+            h2 Recent
+            each mv in movies
+              a.dummy-media-object(href='/movie/#{mv._id}')
+                img(src='#{mv.poster}')
+                h3 #{mv.title}
+          .dummy-column
+            h2 Popular 
+            each pvmv in pvmvs
+              a.dummy-media-object(href="/movie/#{pvmv._id}")
+                img(src="#{pvmv.poster}")
+                h3 #{pvmv.title}
+
+        span.morphsearch-close
+    form(method='GET', action='/results')
+      .input-group.col-sm-4.pull-right
+        input.form-control(type='text', name='q')
+        span.input-group-btn
+          button.btn.btn-default(type='submit') Search
+   
+    script(src="/js/search.js")
+    script(src="/js/classie.js")
+    script(src="/js/index.js")
+
+  

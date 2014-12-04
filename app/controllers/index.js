@@ -8,23 +8,36 @@ exports.index = function(req, res) {
     .find({})
     .populate({
       path: 'movies',
-      select: 'title poster',
-      options: { limit: 6 }
+      select: 'title poster summary pv meta.updateAt',
+      options: { limit: 10 }
     })
     .exec(function(err, categories) {
       if (err) {
         console.log(err)
       }
+      Movie.find().sort({'meta.updateAt':-1})
+      .exec(function(err,movies){
+        if (err){console.log(err);}
 
-      res.render('index', {
-        title: 'Web Development Learning',
-        categories: categories
+        Movie.find().sort({pv:-1}).exec(function(err,pvmovies){
+            res.render('demo', {
+            title: 'Web Development Learning',
+            categories: categories, 
+            movies:movies, 
+            pvmvs : pvmovies
       })
+
+        })
+      
+      })
+
+      
     })
 }
 
 // search page
 exports.search = function(req, res) {
+  console.log('start search...');
   var catId = req.query.cat
   var q = req.query.q
   var page = parseInt(req.query.p, 10) || 0

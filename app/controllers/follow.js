@@ -2,6 +2,25 @@ var mongoose = require('mongoose')
 var Follow = mongoose.model('Follow')
 var User = mongoose.model('User')
 
+exports.unlike=function(req,res){
+	var userid = req.body.uid
+	var fid = req.body.fid
+	if (userid) {
+		Follow.update({person:userid},{$pull:{follows:fid}},function(err,m,raw){
+			if (err) {console.log(err);}
+			Follow.update({person:fid},{$pull:{befollows:userid}},function(err){
+				if (err) {console.log(err);}
+				res.redirect('/user/'+fid)
+			})
+			
+			
+		})
+	}
+}
+
+
+
+
 // like
 exports.like = function(req, res) {
 	var _follow

@@ -2,10 +2,10 @@ var express = require('express')
 var path = require('path')
 var mongoose = require('mongoose')
 var mongoStore = require('connect-mongo')(express)
-var port = process.env.PORT || 4000
+var port = process.env.PORT || 8000
 var app = express()
 var fs = require('fs')
-var dbUrl = 'mongodb://localhost/imooc'
+var dbUrl = 'mongodb://localhost/webdb'
 
 mongoose.connect(dbUrl)
 
