@@ -4,6 +4,8 @@ block content
 
 		h1 Name : #{to.name}
 		h2 Visted : #{to.pv}
+		h2 Photo : 
+		img(src='/upload/#{to.poster}')
 		h2 Create Time : #{moment(to.meta.createAt).format('MM/DD/YYYY')}
 		
 		h2 Follows&nbsp;(#{follows.length}) :
@@ -30,26 +32,72 @@ block content
 					p &nbsp;#{m.title} &nbsp;
 		else 
 			p No Course Video
-		
 
 		if f.indexOf(user._id)<0
-			form(method='POST',action="/user/follow")
-				if user 
-					input(type='hidden',name='uid', value=user._id)
-					input(type='hidden',name='fid', value=to._id)
-					button.btn.btn-primary(type='submit') Follow 
-				else 
-					a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
-		else
-			form(method='POST',action="/user/unfollow")
-				if user 
-					input(type='hidden',name='uid', value=user._id)
-					input(type='hidden',name='fid', value=to._id)
-					button.btn.btn-primary(type='submit') UnFollow 
-				else 
-					a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
-
-
+			if user 
+				button.like(type="button", data-fid="#{to._id}", data-user="#{user._id}") Follow
+				button.unlike(type="button", data-fid="#{to._id}", data-user="#{user._id}",style='display:none') UnFollow
+			else
+				a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
+		else 
+			if user 
+				button.unlike(type="button", data-fid="#{to._id}", data-user="#{user._id}") UnFollow
+				button.like(type="button", data-fid="#{to._id}", data-user="#{user._id}",style='display:none') Follow
+			else
+				a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
+		br
 		br 
 		br 
 		hr
+
+		script.
+			$(function(){
+				$('.like').click(function(e){
+				  var target = $(e.target)
+				  var fid = target.data('fid')
+				  var uid = target.data('user')
+				  console.log('ffuser is %s',fid)
+			  
+				  	$.ajax({
+					    type:'POST', 
+					    url:'/user/follow/'+uid+'?id='+fid 
+				    })
+			  	.done(function(results){
+			    if (results.success === 1){
+			      target.css('display','none');
+			      $('.unlike').css('display','block');
+			      }
+			    })
+			  })
+			$('.unlike').click(function(e){
+			  var target = $(e.target)
+			  var fid = target.data('fid')
+			  var uid = target.data('user')
+			  console.log(uid)
+
+			  $.ajax({
+			    type:'POST', 
+			    url:'/user/unfollow/'+uid+'?id='+fid 
+			    })
+			  .done(function(results){
+			    if (results.success === 1){
+			      target.css('display','none');
+			      $('.like').css('display','block');
+
+			      }
+			    })
+				})
+
+				})
+
+			
+
+
+
+
+
+
+
+
+
+

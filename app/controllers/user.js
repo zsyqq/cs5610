@@ -3,6 +3,9 @@ var User = mongoose.model('User')
 var Follow = mongoose.model('Follow')
 var Movie = mongoose.model('Movie')
 var Favmv = mongoose.model('Favmv')
+var _ = require('underscore')
+var fs = require('fs')
+var path = require('path')
 
 //profile edit
 exports.edit=function(req,res){
@@ -10,8 +13,8 @@ exports.edit=function(req,res){
   if (id){
     User.findById(id, function(err,user){
       res.render('editprofile',{
-        title:'My Profile', 
-        user : user
+        title:'My Profile',  
+        u : user, 
       })
     })
   }
@@ -20,6 +23,7 @@ exports.edit=function(req,res){
 // photo save
 exports.savePhoto= function(req, res, next) {
   var posterData = req.files.uploadPoster
+   console.log('poster is %s');
   var filePath = posterData.path
   var originalFilename = posterData.originalFilename
 
@@ -45,43 +49,32 @@ exports.savePhoto= function(req, res, next) {
 
 // info save 
 exports.infosave = function(req,res){
-  var id = req.body.user._id 
-  var userObj = req.body.user
+  var uid = req.body.uid
+  var uname = req.body.uname
+  var uposter = req.body.uposter
+  var uinterest = req.body.uinterest
+  var uintro = req.body.intro
   var _user
 
+  console.log('userObj: '+ uid);
+
   if (req.poster) {
-    userObj.poster = req.poster
+    uposter = req.poster
   }
-
-  if (id) {
-    User.findById(id, function(err, user) {
-      if (err) {
-        console.log(err)
-      }
-
-      _user = _.extend(user, userObj)
-      _user.save(function(err, user) {
-        if (err) {
-          console.log(err)
-        }
-        res.redirect('/user/' + user._id)
-        
+  if (uid) {
+    User.findById(uid, function(err,user){
+      if (err) {console.log(err);}
+      user.poster = uposter 
+      user.intro = uintro 
+      user.uinterest = uinterest 
+      user.save(function(err,user){
+        console.log('user is %s',user);
+        if (err) {console.log(err);}
+        res.redirect('/user/'+uid)
       })
     })
   }
-  else {
-    _user = new User(userObj)
-
-
-    _user.save(function(err, user) {
-      if (err) {
-        console.log(err)
-      }
-      res.redirect('/user/'+user._id)
-      })
-    }
   }
-
 
 
 // signup
@@ -212,7 +205,7 @@ exports.showInfo = function(req,res) {
           var f = f || []
           console.log(f);
           var fs = f.befollows || []
-          res.render('profile',{
+          res.render('profile1',{
             title: 'profile', 
             to : to, 
             follows : follows, 
@@ -226,44 +219,10 @@ exports.showInfo = function(req,res) {
    
       })
 
-    
-      // console.log(follows);
-
-
-    
 
     })
   })
 }
-
-
-// exports.favmv = function(req,res){
-//   var mid = req.body.mid
-  
-//   var userid = req.body.uid
-//   console.log(userid);
-
-//   Movie.findById(mid,function(err,movie){
-//     if (movie.belike.indexOf(userid)<0){
-//       movie.belike.push(userid)
-//       movie.save(function(err,movie){
-//       if (err) {console.log(err);}
-//       User.findById(userid,function(err,user){
-        
-//         if (err) {console.log(err);}
-//         user.favmv.push(mid)
-//         user.save(function(err,user){
-//           if (err) {console.log(err)}
-//           res.redirect('/movie/'+mid)
-//         })
-//       })
-//     })
-//     }
-//     else {
-//       res.redirect('/movie/'+mid)
-//     }    
-//   })
-// }
 
 
 // midware for user

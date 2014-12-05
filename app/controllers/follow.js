@@ -3,14 +3,16 @@ var Follow = mongoose.model('Follow')
 var User = mongoose.model('User')
 
 exports.unlike=function(req,res){
-	var userid = req.body.uid
-	var fid = req.body.fid
+	var userid = req.params.id
+	var fid = req.query.id
+	console.log(fid);
+	console.log(userid);
 	if (userid) {
 		Follow.update({person:userid},{$pull:{follows:fid}},function(err,m,raw){
 			if (err) {console.log(err);}
 			Follow.update({person:fid},{$pull:{befollows:userid}},function(err){
 				if (err) {console.log(err);}
-				res.redirect('/user/'+fid)
+				res.json({success: 1})
 			})
 			
 			
@@ -24,8 +26,8 @@ exports.unlike=function(req,res){
 // like
 exports.like = function(req, res) {
 	var _follow
-	var userid = req.body.uid
-	var fid = req.body.fid
+	var userid = req.params.id
+	var fid = req.query.id
 
 
 
@@ -46,6 +48,7 @@ exports.like = function(req, res) {
 								befollow.befollows.push(userid)
 								befollow.save(function(err,befollow){
 									if (err) {console.log(err);}
+									res.json({success: 1})
 
 								})
 
@@ -58,15 +61,16 @@ exports.like = function(req, res) {
 								if (err){console.log(err);}
 							})
 							console.log(befollow);
+							res.json({success: 1})
 						}
 
 					})
 
-					res.redirect('/user/'+fid)
+					
 				})
 			}
 			else {
-				res.redirect('/user/'+ fid)
+				res.json({success: 1})
 			}
 		}
 		else {
@@ -88,10 +92,11 @@ exports.like = function(req, res) {
 								befollow.befollows.push(userid)
 								befollow.save(function(err,befollow){
 									if (err) {console.log(err);}
+									res.json({success: 1})
 
 								})
 
-							}
+							}res.json({success: 1})
 						}
 						else {
 							var befollow = new Follow({person: fid})
@@ -100,10 +105,11 @@ exports.like = function(req, res) {
 								if (err){console.log(err);}
 							})
 							console.log(befollow);
+							res.json({success: 1})
 						}
 
 					})
-				res.redirect('/user/'+fid)
+				res.json({success: 1})
 			})
 
 		}

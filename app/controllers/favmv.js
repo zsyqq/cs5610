@@ -5,14 +5,14 @@ var Favmv = mongoose.model('Favmv')
 
 // unlike
 exports.unlike=function(req,res){
-	var userid = req.body.uid
-	var mid = req.body.mid
+	var userid = req.params.id
+	var mid = req.query.id
 	if (userid) {
 		Favmv.update({person:userid},{$pull:{movies:mid}},function(err,m,raw){
 			if (err) {console.log(err);}
 			Movie.update({_id:mid},{$pull:{belike:userid}},function(err){
 				if (err) {console.log(err);}
-				res.redirect('/movie/'+mid)
+				res.json({success: 1})
 			})
 			
 			
@@ -28,10 +28,13 @@ exports.unlike=function(req,res){
 
 // like
 exports.favmv = function(req, res) {
-	var userid = req.body.uid
-	var mid = req.body.mid
+	// var userid = req.body.uid
+	// var mid = req.body.mid
+	var userid = req.params.id
+	var mid = req.query.id
 	var _favmv
 	console.log(userid);
+	console.log(mid);
 
 
 	Favmv.findOne({person: userid},function(err,favmv){
@@ -48,13 +51,13 @@ exports.favmv = function(req, res) {
 							mv.belike.push(userid)
 							mv.save(function(err,mv){
 								if (err) {console.log(err);}
-								res.redirect('/movie/'+mid)
+								res.json({success: 1})
 							})
 						}
-						else{res.redirect('/movie/'+mid)}
+						else{res.json({success: 1})}
 					})
 				})
-			}else{res.redirect('/movie/'+mid)}
+			}else{res.json({success: 1})}
 
 
 		}
@@ -73,10 +76,10 @@ exports.favmv = function(req, res) {
 						movie.belike.push(userid)
 						movie.save(function(err,movie){
 							if(err){console.log(err+'movie save');}
-							res.redirect('/movie/'+mid)
+							res.json({success: 1})
 
 						})
-					}else{res.redirect('/movie/'+mid)}
+					}else{res.json({success: 1})}
 				})
 				
 			})

@@ -37,10 +37,10 @@ module.exports = function(app) {
   app.post('/admin/movie', User.signinRequired, User.adminRequired, Movie.savePoster, Movie.save)
   app.get('/admin/movie/list', User.signinRequired, User.adminRequired, Movie.list)
   app.delete('/admin/movie/list', User.signinRequired, User.adminRequired, Movie.del)
-  app.post('/movie/like',Favmv.favmv)
-  app.post('/movie/unlike',User.signinRequired,Favmv.unlike)
+  app.post('/movie/like/:id',User.signinRequired,Favmv.favmv)
+  app.post('/movie/unlike/:id',User.signinRequired,Favmv.unlike)
   app.get('/user/edit/:id', User.signinRequired, User.edit)
-  app.post('/user/edit', User.signinRequired, User.infosave)
+  app.post('/user/edit', User.signinRequired, User.savePhoto, User.infosave)
 
 
 
@@ -53,8 +53,8 @@ module.exports = function(app) {
   app.get('/admin/category/list', User.signinRequired, User.adminRequired, Category.list)
   
   //follow
-  app.post('/user/follow',User.signinRequired, Follow.like)
-  app.post('/user/unfollow',User.signinRequired, Follow.unlike)
+  app.post('/user/follow/:id',User.signinRequired, Follow.like)
+  app.post('/user/unfollow/:id',User.signinRequired, Follow.unlike)
   // results
   app.get('/results', Index.index)
 }

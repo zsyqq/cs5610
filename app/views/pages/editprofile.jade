@@ -3,34 +3,36 @@ extends ../layout
 block content
   .container
     .row
-      form.form-horizontal(method="post", action="/admin/movie", enctype="multipart/form-data")
-        if user._id
-          input(type="text", disabled, value=user._id)
+      form.form-horizontal(method="post", action="/user/edit", enctype="multipart/form-data")
+        if u._id
+
         .form-group
           label.col-sm-2.control-label(for="inputCategory") ID
           .col-sm-10
-            input#inputCategory.form-control(type="text", disabled, value=user._id)
+            input(type="hidden",name="uid" ,value=u._id)
+            input#inputCategory.form-control(type="text",disabled,value=u._id)
         .form-group
           label.col-sm-2.control-label(for="inputCategory") Name
           .col-sm-10
-            input#inputCategory.form-control(type="text", name='user[name]', value=user.name)
+            input(type="hidden",name="uname" ,value=u.name)
+            input#inputCategory.form-control(type="text", disabled, value=u.name)
         .form-group
           label.col-sm-2.control-label(for="inputCategory") Interest
           .col-sm-10
-            input#inputCategory.form-control(type="text", name="user[interest]", value=user.interest)
+            input#inputCategory.form-control(type="text", name="uinterest", value=u.interest)
         
         .form-group
           label.col-sm-2.control-label(for="inputPoster") Photo
           .col-sm-10
-            input#inputPoster.form-control(type="text", name="user[photo]", value=user.photo)
+            input#inputPoster.form-control(type="text", name="uposter", value=u.poster)
         .form-group
-          label.col-sm-2.control-label(for="uploadPoster") Upload Photo
+          label.col-sm-2.control-label(for="uploadPoster") Upload Poster
           .col-sm-10
             input#uploadPoster(type="file", name="uploadPoster")
         .form-group
           label.col-sm-2.control-label(for="inputSummary") Introduction
           .col-sm-10
-            textarea#inputSummary.form-control(type="text", name="user[intro]")= user.intro
+            textarea#inputSummary.form-control(type="text", name="uintro")= u.intro
 
           
             

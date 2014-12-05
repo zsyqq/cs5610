@@ -20,9 +20,10 @@ exports.detail = function(req, res) {
     //  console.log(m);
     Comment
       .find({movie: id})
-      .populate('from', 'name')
-      .populate('reply.from reply.to', 'name')
+      .populate('from', 'name poster intro')
+      .populate('reply.from reply.to', 'name poster')
       .exec(function(err, comments) {
+        User.findById(id, cb)()
         res.render('detail', {
           title: 'Course Detail',
           movie: m,
@@ -75,6 +76,7 @@ exports.savePoster = function(req, res, next) {
 
       fs.writeFile(newPath, data, function(err) {
         req.poster = poster
+        console.log(req.poster);
         next()
       })
     })

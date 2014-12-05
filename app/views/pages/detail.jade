@@ -15,7 +15,8 @@ block content
                 li.media
                   .pull-left
                     a.comment(href="#comments", data-cid="#{item._id}", data-tid="#{item.from._id}")
-                      img.media-object(src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+", style="width: 64px; height: 64px;")
+                      img.media-object(src="/img/#{item.from.poster}", style="width: 64px; height: 64px;")
+                      p #{item.from.intro}
                   .media-body
                     h4.media-heading #{item.from.name}
                     p #{item.content}
@@ -25,6 +26,7 @@ block content
                           .pull-left
                             a.comment(href="#comments", data-cid="#{item._id}", data-tid="#{reply.from._id}")
                               img.media-object(src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+", style="width: 64px; height: 64px;")
+                              p #{reply.from.name}
                          .media-body
                             h4.media-heading
                               | #{reply.from.name}
@@ -47,22 +49,19 @@ block content
         .dl-horizontal
        
           if movie.belike.indexOf(user._id)<0
-            form(method='POST', action='/movie/like')
-              if user 
-                input(type='hidden', name='uid', value=user._id)
-                input(type='hidden', name='mid', value=movie._id)
-                button(type='submit') favorite
-              else
-                a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
+            if user 
+              button.like(type="button", data-id="#{movie._id}", data-user="#{user._id}") Like
+              button.unlike(type="button", data-id="#{movie._id}", data-user="#{user._id}",style='display:none') Unlike
+            else
+              a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
           else 
-            form(method='POST', action='/movie/unlike')
-              if user 
-                input(type='hidden', name='uid', value=user._id)
-                input(type='hidden', name='mid', value=movie._id)
-                button(type='submit') unlike
-              else
-                a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
-
+            if user 
+              button.unlike(type="button", data-id="#{movie._id}", data-user="#{user._id}") Unlike
+              button.like(type="button", data-id="#{movie._id}", data-user="#{user._id}",style='display:none') Like
+            else
+              a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
+          br 
+ 
       
           dt Course Name
           dd= movie.title
@@ -87,6 +86,7 @@ block content
           dd=movie.dislrate
   script(src="/build/detail.min.js")
   script.
+
     $(function(){
       var target=$('#video');
       var videoid = target.data('vflash')
@@ -109,5 +109,40 @@ block content
           { allowScriptAccess: "always", allowFullScreen: "true" },
           { id: "video" }
         )
+        $('.like').click(function(e){
+          var target = $(e.target)
+          var id = target.data('id')
+          var uid = target.data('user')
+          console.log(uid)
+          
+          $.ajax({
+            type:'POST', 
+            url:'/movie/like/'+uid+'?id='+id 
+            })
+          .done(function(results){
+            if (results.success === 1){
+              target.css('display','none');
+              $('.unlike').css('display','block');
+              }
+            })
+          })
+        $('.unlike').click(function(e){
+          var target = $(e.target)
+          var id = target.data('id')
+          var uid = target.data('user')
+          console.log(uid)
+          
+          $.ajax({
+            type:'POST', 
+            url:'/movie/unlike/'+uid+'?id='+id 
+            })
+          .done(function(results){
+            if (results.success === 1){
+              target.css('display','none');
+              $('.like').css('display','block');
+
+              }
+            })
+          })
       })
     
