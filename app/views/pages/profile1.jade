@@ -4,6 +4,11 @@ html.demo-7(lang="en")
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(href="/libs/bootstrap/dist/css/bootstrap.min.css", rel="stylesheet")
+    script(src="/libs/jquery/dist/jquery.min.js")
+    script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
+    script(src="/build/index.css")
+    script(src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js")
     title
     link(rel="stylesheet", type="text/css", href="/css/normalize.css")
    
@@ -12,87 +17,250 @@ html.demo-7(lang="en")
     link(rel="stylesheet", type="text/css", href="/css/demo1.css")
     link(rel="stylesheet", type="text/css", href="/css/component1.css")
     script(src="/js/modernizr.custom.js")
-    link(href="/libs/bootstrap/dist/css/bootstrap.min.css", rel="stylesheet")
-    script(src="/libs/jquery/dist/jquery.min.js")
-    script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
+    script(src='/js/admin.js')
+    script(src='/js/detail.js')
+
+
   body
+
     #container.container
       
       #tabs.tabs
+        include ../includes/header
         nav
           ul
 
             li
-              a(href="#section-1")
-                span Favorite Course
+              a.icon-food(href="#section-1")
+                img(src='/img/icons/male80.png',height='30',weight='30')
+                span &nbsp;Profile
+                
             li
               a(href="#section-2")
-                span Follows
+                img(src='/img/icons/five5.png',height='30',weight='30')
+                span &nbsp;Follows(#{follows.length})
             li
               a(href="#section-3")
-                span Followers
+                img(src='/img/icons/half13.png',height='30',weight='30')
+                span &nbsp;Followers(#{befollows.length})
             li
               a(href="#section-4")
-                span Profile
-            li
-              a(href="#section-5")
-                span Settings
+                img(src='/img/icons/book92.png',height='30',weight='30')
+                span &nbsp;My Course(#{movies.length})
+            if user
+              if user._id == to._id 
+                li
+                  a(href="#section-5")
+                    img(src='/img/icons/cogwheel9.png',height='30',weight='30')
+                    span &nbsp;Settings
+              else 
+                li
+                  a(href="#section-5",style='display:none')
+                    img(src='/img/icons/cogwheel9.png',height='30',weight='30')
+                    span &nbsp;Settings
+            else 
+               li
+                  a(href="#section-5",style='display:none')
+                    img(src='/img/icons/cogwheel9.png',height='30',weight='30')
+                    span &nbsp;Settings
         .content
           section#section-1
-            .mediabox
-              img(src="/img/01.png", alt="img01")
-              h3
-              p
+
+        
+            .col-sm-4.col-md-3
+              .thumbnail(style='box-shadow: 0 0 5px 2px rgba(0,0,0,.35)')
+                img(src="/upload/#{to.poster}", alt="img01")
+              .caption
+                h3 #{to.name}
+              p Visitors : #{to.pv}
+              if user 
+                if user._id != to._id
+                  if f.indexOf(user._id)<0
+                    //- button.like(type="button", data-fid="#{to._id}", data-user="#{user._id}")
+                    img.like(src='/img/icons/neutral.png',height='30',width='30',data-fid="#{to._id}", data-user="#{user._id}")
+                    //- button.unlike(type="button", data-fid="#{to._id}", data-user="#{user._id}",style='display:none')
+                    img.unlike(src='/img/icons/happy6.png',height='30',width='30',data-fid="#{to._id}", data-user="#{user._id}",style='display:none')
+                  else
+                    //- button.unlike(type="button", data-fid="#{to._id}", data-user="#{user._id}") 
+                    img.unlike(src='/img/icons/happy6.png',height='30',width='30', data-fid="#{to._id}", data-user="#{user._id}")
+                    //- button.like(type="button", data-fid="#{to._id}", data-user="#{user._id}",style='display:none') 
+                    img(src='/img/icons/neutral.png',height='30',width='30',data-fid="#{to._id}", data-user="#{user._id}",style='display:none')
+                else 
+                  h4 Welccome you 
+              
+                    
+
+
+            .col-sm-10.col-md-8(style='box-shadow: 0 0 5px 2px rgba(0,0,0,.35)')
+              h1(style='text-align:center') Introduction
+              p(style='font-family:yahei;color:black') Created by &nbsp;#{moment(to.meta.createAt).format('MMMM Do YYYY, h:mm:ss a')}
+              p Interest : &nbsp; #{to.interest}
+              hr
+              p &nbsp;&nbsp;&nbsp;&nbsp;#{to.intro}
+
+
+
+              
           section#section-2
-            .mediabox
-              img(src="/img/04.png", alt="img04")
-              h3
-              p
+            if follows.length>0
+              each f in follows
+                .col-sm-6.col-md-3
+                  .thumbnail(style='box-shadow: 0 0 5px 2px rgba(0,0,0,.35);border-radius: 50%;')
+                    a(href="/user/#{f._id}")
+                      img(src="/upload/#{f.poster}",style='border-radius: 50%')
+                  .caption(style='text-align:center')
+                    a(href="/user/#{f._id}")
+                      .bordered-link #{f.name}
+            else 
+              .bordered-link No follows
           section#section-3
-            .mediabox
-              img(src="/img/02.png", alt="img02")
-              h3
-              p
+            if befollows.length > 0
+               each f in befollows
+                .col-sm-6.col-md-3
+                  .thumbnail(style='box-shadow: 0 0 5px 2px rgba(0,0,0,.35);border-radius: 50%;')
+                    a(href="/user/#{f._id}")
+                      img(src="/upload/#{f.poster}",style='border-radius: 50%')
+                  .caption(style='text-align:center')
+                    a(href="/user/#{f._id}")
+                      .bordered-link #{f.name}
+            else 
+              .bordered-link No followers
+      
           section#section-4
-            .mediabox
-              img(src="/img/03.png", alt="img03")
-              h3
-              p
+            if movies.length>0
+              each m in movies
+                .col-sm-6.col-md-3
+                  .thumbnail(style='box-shadow: 0 0 5px 2px rgba(0,0,0,.35)')
+                    a(href='/movie/#{m._id}')
+                      img(src='#{m.poster}')
+                  .caption(style='text-align:center')
+                    a(href='/movie/#{m._id}')
+                      p &nbsp;#{m.title} &nbsp;
+            else 
+              .bordered-link No Movies
+
+
           section#section-5
-            .mediabox
-              img(src="/img/02.png", alt="img02")
-              h3
-              p
+            .row
+              form.form-horizontal(method="post", action="/user/edit", enctype="multipart/form-data")
+                if user
+                  if user.role < 50 
+                    h2 Hi Student &nbsp; #{user.name}
+                  else 
+                    h2 Hi Instructor &nbsp; #{user.name}
+
+                  .form-group
+                    label.col-sm-2.control-label(for="inputCategory") ID
+                    .col-sm-10
+                      input(type="hidden",name="uid" ,value=to._id)
+                      input#inputCategory.form-control(type="text",disabled,value=to._id)
+                  .form-group
+                    label.col-sm-2.control-label(for="inputCategory") Name
+                    .col-sm-10
+                      input(type="hidden",name="uname" ,value=to.name)
+                      input#inputCategory.form-control(type="text", disabled, value=to.name)
+                  .form-group
+                    label.col-sm-2.control-label(for="inputCategory") Interest
+                    .col-sm-10
+                      input#inputCategory.form-control(type="text", name="uinterest", value=to.interest)
+                  
+                  .form-group
+                    label.col-sm-2.control-label(for="inputPoster") Photo
+                    .col-sm-10
+                      input#inputPoster.form-control(type="text", name="uposter", value=to.poster)
+                  .form-group
+                    label.col-sm-2.control-label(for="uploadPoster") Upload Poster
+                    .col-sm-10
+                      input#uploadPoster(type="file", name="uploadPoster")
+                  .form-group
+                    label.col-sm-2.control-label(for="inputSummary") Introduction
+                    .col-sm-10
+                      textarea#inputSummary.form-control(type="text", name="uintro")= to.intro
+                     
+                  .form-group
+                    .col-sm-offset-10.col-sm-20
+                      button.btn.btn-default(type="submit") Upload
+            
+
+
+
+
+
     .morph-button.morph-button-sidebar.morph-button-fixed
-      button(type="button")
-        span.icon.icon-cog Settings Menu
-      .morph-content
-        div
-          .content-style-sidebar
-            span.icon.icon-close Close the overlay
-            h2 Settings
-            ul
-              li
-                a.icon(href="#") Default filters
-              li
-                a.icon(href="#") Storage Use
-              li
-                a.icon(href="#") Favorites
-              li
-                a.icon(href="#") Readability
-              li
-                a.icon(href="#") Speech
-              li
-                a.icon(href="#") Uploads
-              li
-                a.icon(href="#") Profile
-              li
-                a.icon(href="#") Documents
-              li
-                a.icon(href="#") Global Options
+      if user
+        if user.role>50 
+          button(type="button")
+            img(src='/img/icons/cogwheel9.png',height='30',weight='30') 
+
+        
+          
+        .morph-content
+          div
+            .content-style-sidebar
+              //- span.icon.icon-close Close the overlay
+              img.icon.icon-close(src='/img/icons/curve20.png',height='20', weight='20')
+              h2 Settings
+              ul
+                li
+                  a.icon(href="#") Default filters
+                li
+                  a.icon(href="#") Storage Use
+                li
+                  a.icon(href="#") Favorites
+                li
+                  a.icon(href="#") Readability
+                li
+                  a.icon(href="#") Speech
+                li
+                  a.icon(href="#") Uploads
+                li
+                  a.icon(href="#") Profile
+                li
+                  a.icon(href="#") Documents
+                li
+                  a.icon(href="#") Global Options
   script(src="/js/classie.js")
   script(src="/js/uiMorphingButton_fixed.js")
   script(src="/js/adjs.js")
   script(src="/js/cbpFWTabs.js")
   script.
     new CBPFWTabs( document.getElementById( 'tabs' ) );
+  script.
+    $(function(){
+        $('.like').click(function(e){
+          var target = $(e.target)
+          var fid = target.data('fid')
+          var uid = target.data('user')
+          console.log('ffuser is %s',fid)
+        
+            $.ajax({
+              type:'POST', 
+              url:'/user/follow/'+uid+'?id='+fid 
+            })
+          .done(function(results){
+          if (results.success === 1){
+            target.css('display','none');
+            $('.unlike').css('display','block');
+            }
+          })
+        })
+      $('.unlike').click(function(e){
+        var target = $(e.target)
+        var fid = target.data('fid')
+        var uid = target.data('user')
+        console.log(uid)
+
+        $.ajax({
+          type:'POST', 
+          url:'/user/unfollow/'+uid+'?id='+fid 
+          })
+        .done(function(results){
+          if (results.success === 1){
+            target.css('display','none');
+            $('.like').css('display','block');
+
+            }
+          })
+        })
+
+        })

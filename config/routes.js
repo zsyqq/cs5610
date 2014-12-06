@@ -39,7 +39,7 @@ module.exports = function(app) {
   app.delete('/admin/movie/list', User.signinRequired, User.adminRequired, Movie.del)
   app.post('/movie/like/:id',User.signinRequired,Favmv.favmv)
   app.post('/movie/unlike/:id',User.signinRequired,Favmv.unlike)
-  app.get('/user/edit/:id', User.signinRequired, User.edit)
+  // app.get('/user/edit/:id', User.signinRequired, User.edit)
   app.post('/user/edit', User.signinRequired, User.savePhoto, User.infosave)
 
 

@@ -4,7 +4,8 @@
       a.navbar-brand(href="/") Web-Learn
     if user
       p.navbar-text.navbar-right
-        span Welcome,#{user.name}
+        a(href="/user/#{user._id}")
+          span Welcome,#{user.name}
         span &nbsp;|&nbsp;
         a.navbar-link(href="/logout") Logout
     else

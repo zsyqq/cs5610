@@ -1,16 +1,6 @@
 /* General Blueprint Style */
-/*@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);*/
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
-@font-face {
-	font-family: 'bpicons';
-	src:url('/fonts/bpicons/bpicons.eot');
-	src:url('/fonts/bpicons/bpicons.eot?#iefix') format('embedded-opentype'),
-		url('/fonts/bpicons/bpicons.woff') format('woff'),
-		url('/fonts/bpicons/bpicons.ttf') format('truetype'),
-		url('/fonts/bpicons/bpicons.svg#bpicons') format('svg');
-	font-weight: normal;
-	font-style: normal;
-} /* Made with http://icomoon.io/ */
 
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 body, html { font-size: 100%; padding: 0; margin: 0;}
@@ -30,18 +20,38 @@ a {
 	outline: none;
 }
 
+.bordered-link {
+  display: inline-block;
+  padding: 8px;
+  border: 3px solid #26BBFC;
+  border-radius: 6px;
+  box-shadow:
+    0 2px 1px rgba(0, 0, 0, 0.2), 
+    inset 0 2px 1px rgba(0, 0, 0, 0.2);
+    
+  /* Font styles */
+  text-decoration: none;
+  font-size: 14px;
+  color: #222;
+}
+
+.bordered-link:hover  { border-color: #FDD68B; }
+.bordered-link:active { border-color: #FEE8BD; }
+
+
 a:hover {
 	color: #000;
+	text-decoration: none;
 }
 
-.container > header {
-	width: 90%;
+.container {
+	width: 100%;
 	max-width: 69em;
 	margin: 0 auto;
-	padding: 2.875em 1.875em 1.875em;
+
 }
 
-.container > header h1 {
+.container > h1 {
 	font-size: 2.125em;
 	line-height: 1.3;
 	margin: 0 0 0.6em 0;
@@ -49,7 +59,7 @@ a:hover {
 	font-weight: 400;
 }
 
-.container > header > span {
+.container > span {
 	display: block;
 	position: relative;
 	z-index: 9999;
@@ -59,7 +69,7 @@ a:hover {
 	padding: 0 0 0.6em 0.1em;
 }
 
-.container > header > span span:after {
+.container > span span:after {
 	width: 30px;
 	height: 30px;
 	left: -12px;
@@ -69,7 +79,7 @@ a:hover {
 	position: relative;
 }
 
-.container > header > span span:hover:before {
+.container > span span:hover:before {
 	content: attr(data-content);
 	text-transform: none;
 	text-indent: 0;
@@ -86,12 +96,12 @@ a:hover {
 	background: #47a3da;
 }
 
-.container > header nav {
+.container > nav {
 	float: right;
 	text-align: center;
 }
 
-.container > header nav a {
+.container > nav a {
 	display: inline-block;
 	position: relative;
 	text-align: left;
@@ -103,11 +113,11 @@ a:hover {
 	border: 4px solid #47a3da;
 }
 
-.container > header nav a > span {
+.container > nav a > span {
 	display: none;
 }
 
-.container > header nav a:hover:before {
+.container > nav a:hover:before {
 	content: attr(data-info);
 	color: #47a3da;
 	position: absolute;
@@ -118,11 +128,11 @@ a:hover {
 	pointer-events: none;
 }
 
-.container > header nav a:hover {
+.container > nav a:hover {
 	background: #47a3da;
 }
 
-.bp-icon:after {
+/*.bp-icon:after {
 	font-family: 'bpicons';
 	speak: none;
 	font-style: normal;
@@ -132,9 +142,9 @@ a:hover {
 	text-align: center;
 	color: #47a3da;
 	-webkit-font-smoothing: antialiased;
-}
+}*/
 
-.container > header nav .bp-icon:after {
+.container > nav .bp-icon:after {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -144,11 +154,11 @@ a:hover {
 	text-indent: 0;
 }
 
-.container > header nav a:hover:after {
+.container > nav a:hover:after {
 	color: #fff;
 }
 
-.bp-icon-next:after {
+/*.bp-icon-next:after {
 	content: "\e000";
 }
 .bp-icon-drop:after {
@@ -162,18 +172,33 @@ a:hover {
 }
 .bp-icon-prev:after {
 	content: "\e004";
-}
+}*/
 
 p.info {
 	text-align: center;
 	padding: 20px;
 }
-html.demo-7, .demo-7 body {
-	overflow-x: hidden;
-	height: 100%;
 
+@media screen and (max-width: 55em) {
+
+	.container > h1,
+	.container > nav {
+		float: none;
+	}
+
+	.container >span,
+	.container > h1 {
+		text-align: center;
+	}
+
+	.container > nav {
+		margin: 0 auto;
+	}
+
+	.container > span {
+		text-indent: 30px;
+	}
 }
-
 .demo-7 .container {
 	width: 100%;
 	position: absolute;
@@ -225,21 +250,21 @@ html.demo-7, .demo-7 body {
 
 @media screen and (max-width: 55em) {
 
-	.container > header h1,
-	.container > header nav {
+	.container > h1,
+	.container > nav {
 		float: none;
 	}
 
-	.container > header > span,
-	.container > header h1 {
+	.container > span,
+	.container > h1 {
 		text-align: center;
 	}
 
-	.container > header nav {
+	.container > nav {
 		margin: 0 auto;
 	}
 
-	.container > header > span {
+	.container > span {
 		text-indent: 30px;
 	}
 }

@@ -7,23 +7,11 @@ var _ = require('underscore')
 var fs = require('fs')
 var path = require('path')
 
-//profile edit
-exports.edit=function(req,res){
-  var id = req.params.id 
-  if (id){
-    User.findById(id, function(err,user){
-      res.render('editprofile',{
-        title:'My Profile',  
-        u : user, 
-      })
-    })
-  }
-}
+
 
 // photo save
 exports.savePhoto= function(req, res, next) {
   var posterData = req.files.uploadPoster
-   console.log('poster is %s');
   var filePath = posterData.path
   var originalFilename = posterData.originalFilename
 
@@ -50,31 +38,26 @@ exports.savePhoto= function(req, res, next) {
 // info save 
 exports.infosave = function(req,res){
   var uid = req.body.uid
-  var uname = req.body.uname
-  var uposter = req.body.uposter
   var uinterest = req.body.uinterest
-  var uintro = req.body.intro
-  var _user
+  var uintro = req.body.uintro
 
-  console.log('userObj: '+ uid);
-
-  if (req.poster) {
-    uposter = req.poster
-  }
-  if (uid) {
-    User.findById(uid, function(err,user){
-      if (err) {console.log(err);}
-      user.poster = uposter 
-      user.intro = uintro 
-      user.uinterest = uinterest 
-      user.save(function(err,user){
-        console.log('user is %s',user);
-        if (err) {console.log(err);}
-        res.redirect('/user/'+uid)
-      })
+  
+  User.findById(uid,function(err,user){
+    user.interest = uinterest
+    user.intro = uintro
+    if (req.poster) {
+      user.poster = req.poster
+      
+    }
+    user.save(function(err,user){
+      if (err) console.log(err);
+      res.redirect('/user/'+user._id)
     })
+
+  })
+
   }
-  }
+  
 
 
 // signup
@@ -186,8 +169,8 @@ exports.showInfo = function(req,res) {
 
     Follow
     .find({person:id})
-    .populate('follows','name _id')
-    .populate('befollows','name _id')
+    .populate('follows','name _id poster')
+    .populate('befollows','name _id poster')
     .exec(function(err,follow){
       var follow  = follow[0] || {}
       var follows = follow.follows || []

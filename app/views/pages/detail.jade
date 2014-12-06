@@ -47,19 +47,18 @@ block content
                   a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
       .col-md-5
         .dl-horizontal
-       
-          if movie.belike.indexOf(user._id)<0
-            if user 
+          if user
+            if movie.belike.indexOf(user._id)<0
               button.like(type="button", data-id="#{movie._id}", data-user="#{user._id}") Like
               button.unlike(type="button", data-id="#{movie._id}", data-user="#{user._id}",style='display:none') Unlike
             else
-              a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
-          else 
-            if user 
               button.unlike(type="button", data-id="#{movie._id}", data-user="#{user._id}") Unlike
               button.like(type="button", data-id="#{movie._id}", data-user="#{user._id}",style='display:none') Like
-            else
-              a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
+
+          else 
+            a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
+         
+          
           br 
  
       
