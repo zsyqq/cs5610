@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Project Document</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color:#fff19b;
+        }
+        #reference:hover {
+            cursor: pointer;
+        }
+        #main {
+            padding-top:100px;
+        }
+        #demo {
+            padding-top:100px;
+        }
+        #docs {
+            padding-top: 100px;
+        }
+        #reference {
+            padding-top: 100px;
+        }
+        pre {
+            height: auto;
+            max-height: 200px;
+            overflow: auto;
+            background-color: #eeeeee;
+            word-break: normal !important;
+            word-wrap: normal !important;
+            white-space: pre !important;
+        }​
+    </style>
+</head>
+<body ng-app="plunker">
+    <div id="navBar" class="bs-example" ng-controller="DropdownCtrl">
+        <nav id="navbar-example" class="navbar navbar-inverse navbar-static navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+
+                    <a class="navbar-brand" href="#">Final Project:&nbsp;<span style="font-size:30px;font-family:'Microsoft YaHei'">Documentation</span></a>
+                    <br />
+                    <hr />
+                </div>
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group" dropdown is-open="status.isopen">
+
+
+                        <button type="button" class="btn btn-info dropdown-toggle" ng-disabled="disabled">
+                            Content <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#demo" style="text-align:center;color:#0094ff"><strong>Demo</strong></a></li>
+                            <li class="divider"></li>
+                            <li><a href="#docs" style="text-align:center;color:#ff6a00"><strong>Documentation</strong></a></li>
+                            <li class="divider"></li>
+                            <li><a href="#reference" style="text-align:center;color:#1b8e25"><strong>Reference</strong></a></li>
+
+
+
+                        </ul>
+                    </div>
+               
+
+                    <div class="btn-group">
+                        <a href="../../Default.aspx">
+                            <button type="button" class="btn btn-warning">Home</button>
+
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a href="../../fileview/Default.aspx?~/experiment/nodejs_mongodb/experiment2.html">
+                            <button type="button" class="btn btn-success">Source Code</button>
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a href="../../story/index.htm?../experiment/story.txt">
+                            <button type="button" class="btn btn-danger">StoryUtility</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </nav> 
+        <script>
+            angular.module('plunker', ['ui.bootstrap']);
+            function DropdownCtrl($scope) {
+                $scope.status = {
+                    isopen: false
+                };a
+            };
+        </script>
+    </div>
+
+    <div id="main" class="container">
+        <div class="text-center jumbtro">
+            <h3>Demo</h3>
+            <p class="lead">This web aplication has been deployed at <mark>openshift</mark> server side</p>
+            <p>
+                <a href="http://cs5610-zsyqq.rhcloud.com/" target="_blank"><h3>Demo Page Link</h3></a>
+                <a href="https://github.com/zsyqq/cs5610.git" target='_blank'><h3>View Source On Github</h3></a>
+            </p>
+        </div>
+        <br>
+        <p>
+            <mark><h1><strong>Guide : </strong></h1></mark>
+            <p>Administor User : </p>
+            <p>Username : zsy ; Password: zsy</p>
+            <p>Normal User 1: </p>
+            <p>Username : aa ; Password: aa</p>
+            <p>Normal User 2: </p>
+            <p>Username : bb ; Password: bb</p>
+            <p>Normal User 3: </p>
+            <p>Username : cc ; Password: cc</p>
+            <p>Normal User 4: </p>
+            <p>Username : dd ; Password: dd</p>
+
+        </p>
+        
+      
+      
+        <hr />
+        <div id="docs">
+            <p style="color: #ff6a00" class="lead">Documentation</p>
+            <h4 style="padding-left:10px">Project </h4>
+            <div class="bs-example">
+                 <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Brief Introduction</h4>
+                        <p class="list-group-item-text">This Course learning web Site is for both web learner and instructor. </p>
+                        <p>As the normal user via signing up directly on website, you can: </p>
+                        <ul>
+                            <li>1. Watch course video</li>
+                            <li>2. Collect your favoriate courses for convienence of later watch</li>
+                            <li>3. Edit your personal profile including add your photo, interests,self-introduction </li>
+                            <li>4. View other user's profile</li>
+                            <li>5. Follow other users who you are interested in</li>
+                            <li>6. Comment on the course video or reply others comments</li>
+                        </ul>
+                        
+                        <p>As the Instructor you can : </p>
+                        <ul>
+                            <li>1. upload course video and video information</li>
+                            <li>2. upload video either by retrieving from the youtube api or by manually upload</li>
+                            <li>3. editing delete course information</li>
+                            <li>4. delete users</li>
+                        </ul>
+
+                       
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Third Party API</h4>
+                        <p class="list-group-item-text">
+                           YouTube Data API (v3):
+                           <p>jQuery getJSON to retrieve data and formatted the data.</p>
+                           <p>How to use? </p>
+                            <p>REQUEST : "https://www.googleapis.com/youtube/v3/videos"</p>
+                            <P>Retrieve data and formatted: </P>
+                            <pre>
+$.getJSON("https://www.googleapis.com/youtube/v3/videos", {
+          key: "AIzaSyD9kAseErgb-EmLm5HHO0tXLgh9VGGnC5c",
+          part: "snippet,statistics",
+          id: videoid
+        }, function(data) {
+         
+          $('#inputTitle').val(data.items[0].snippet.title)
+         
+          $('#inputPoster').val(data.items[0].snippet.thumbnails.medium.url.replace("https","http"))
+          $('#inputYear').val(data.items[0].snippet.publishedAt)
+          $('#inputSummary').val(data.items[0].snippet.description)
+          $('#inputFlash').val(videoid)
+          $('#viewRate').val(data.items[0].statistics.viewCount)
+          $('#FavoriteRate').val(data.items[0].statistics.favoriteCount)
+          $('#LikeRate').val(data.items[0].statistics.likeCount)
+          $('#DislikeRate').val(data.items[0].statistics.dislikeCount)                                
+                            </pre>
+                        </p>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Database Design</h4>
+                        <p class="list-group-item-text">
+                            <img src="ER DATABASE - New Page.png" height="647" width="900" alt="DB">
+                        </p>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Process FlowChart</h4>
+                        <p class="list-group-item-text">
+                            <img src="Process - New Page.png" height="700" width="900" alt="flowchart">
+                        </p>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Design Architecture</h4>
+                        <strong>Front End Design</strong>
+                        <p class="text-center"><img src="front-end-design.png" height="645" width="900" alt="front-end-design.png"></p>
+                        <strong>Back-End Design</strong>
+                        <p class="text-center"><img src="back-end-design.png" height="645" width="900" alt="front-end-design.png"></p>
+
+
+                    </a>
+                     <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">MVC Framework --> File Layout</h4>
+                        
+                        <p class="text-center"><img src="file layout.png" height="645" width="900" alt="front-end-design.png"></p>
+                       
+
+
+                    </a>
+
+                </div>
+            </div>
+            <div class="text-warning lead"><strong>Feature</strong></div>
+            <dl class="dl-horizontal">
+                <dt class="text-success lead">No login User</dt>
+                <dd>1. Search courses in this course website</dd>
+                <dd>2. View the Users profile who has signed up</dd>
+                <dd>3. View course brief introduction <mark>But can't view the course video</mark></dd>
+                <hr>
+                <dt class="text-success lead">Normal User</dt>
+                <dd>Sign up directly on website can get the normal user</dd>
+                <dd>Enter the passowrd and username to login</dd>
+                <dd>You can do : </dd>
+                <dd>1. By click on the <code>Course Menu</code> on homepage you can get the course category and each category has courses</dd>
+                <dd>2. Watch course Video</dd>
+                <dd>3. Comment on the course video</dd>
+                <dd>4. Reply other users' comments under the course video</dd>
+                <dd>5. <code>Like</code> Button can collect the video into your own profile. <code>UnLike</code> is to unlike the course video</dd>
+                <dd>6. Edit profile page by adding your introduction, interest, uploading the photo from local</dd>
+                <dd>7. Follow/unfollow other users</dd>
+                <dd>8. search course videos</dd>
+                <hr>
+                <dt class="text-info lead">Administor User</dt>
+                <dd>Administor User cannot be signed up directly. It's provided by developer.</dd>
+                <dd>1. Upload video: (1) Retrieve data from the Cloud by using <mark>YouTube Data API (v3)</mark> (2)Manually enter </dd>
+                <dd>2. Create/Edit/Delete course video</dd>
+                <dd>3. Create/Delete category</dd>
+                <dd>4. search course videos</dd>
+                <hr>
+                <dt class="text-success lead">Password Strategy</dt>
+                <dd>Plain Password ---> HASH + SALT ----> Encrypted Password saved into database</dd>
+                <dd>With encrypted password, the security level increased.</dd>
+                <dd>Encryption work done by using bcrypt</dd>
+                
+                </dl>
+                <div class="text-warning lead"><strong>Implimentation</strong></div>
+                <div class="text-warning"><strong>Main pages: </strong></div>
+                
+                <dl class="dl-horizontal">
+                
+                <dt class="text-success lead">Homepage: demo.jade</dt>
+                <dd>1. Search Button : search bar and three columns(1) popular users(visited most) (2) recent uploaded course video (3) Popular Course videos be viewed most</dd>
+                <dd>2. Scroll down and click the Course Menu, the course categories will demostrated and each category has movies. </dd>
+                <dd>2. View the Users profile who has signed up</dd>
+                <dd>3. View course brief introduction <mark>But can't view the course video</mark></dd>
+                <hr>
+                
+                <dt class="text-success lead">Profile: profile.ade</dt>
+                <!-- <dd>1. Bying click on the bottom login name, it renders others personal profile page</dd> -->
+                    <dd>Each tab render certain infomation accordingly </dd>
+                    
+                    <dd>Tabs can navigate you to certain page. Pages includes Personal Profile, Follows(who you follow), Followers(who following you), favorite Courses, settings for uploading personal informations</dd> 
+                    <dd><mark>if you are administor user</mark>: a setting button will appear. </dd>
+                <dt class="text-success lead">Administor page</dt>
+                <dd>Only administors can view the page</dd>
+                <dd>Back-end database review including categories, course videos list,user list </dd>
+
+                    
+                <hr>
+                <dt class="text-info lead">Video detail page</dt>
+                <dd>Create new commnets</dd>
+                <dd>Reply others comments</dd>
+                <dd>comments creater's photo can lead to this user's profile page </dd>
+                <dd>Like this video.</dd>
+                <hr>
+                <dt class="text-info lead">Video upload page</dt>
+                <dd>Create new video</dd>
+                <dd>Enter youtube id of certain youtube video then All the data information retrieved from cloud and demonstrated on page.</dd>
+                <dd> You can either use video thumbnail got from youtube api or upload picture from you own computer.</dd>
+
+
+                </dl>
+                <dl class="dl-horizontal">
+                <dt class="text-success lead">Future Work</dt>
+                <dd>1. Administor page : add statistical analysis based on the course video feedback by users.</dd>
+                <dd>2. Form table validation check</dd>
+                <dd>3. Beautify front-end page design</dd>
+                    
+                </dl>
+
+</div>
+       
+        <hr />
+        <div id="reference" ng-controller="CollapseDemoCtrl">
+            <p class="lead" style="color:#1b8e25"" ng-click="isCollapsed = !isCollapsed"> Reference <span class="caret"></span></p>
+
+            <div collapse="isCollapsed">
+                <div class="well well-lg">
+                    <ul>
+                    
+                        <li><a href="http://bower.io/docs/api/#list">Bower</a></li>
+                        <li><a href="http://modernizr.com/">modernizr</a></li>
+                        <li><a href="https://github.com/CSS-Tricks/MovingBoxes">Moving box demo</a></li>
+                        <li><a href="http://www.w3schools.com/">W3C School</a></li>
+                        <li><a href="http://bower.io/docs/api/#list">Bower</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/MongoDB">MongoDB WiKi</a></li>
+                        <li><a href="https://developers.google.com/youtube/v3/">YouTube API </a></li>
+                        <li><a href="http://tympanus.net/codrops/">MIT Web Design Tutorial</a></li>
+                        <li><a href="http://en.wikipedia.org/wiki/Node.js">moment.js</a></li>
+                        <li><a href="http://expressjs.com/">Express</a></li>
+                        <li><a href="http://nodejs.org/api/">NodeJS</a></li>
+                        <li><a href="https://github.com/learnboost/mongoose">Mongose Doc</a></li>
+                        <li><a href="https://github.com/codahale/bcrypt-ruby">bcrypt</a></li>
+                         <li><a href="http://underscorejs.org/">underscore.js</a></li>
+                        <li><a href="http://jade-lang.com/">Jade</a></li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+            <script>
+                angular.module('plunker', ['ui.bootstrap']);
+                function CollapseDemoCtrl($scope) {
+                    $scope.isCollapsed = true;
+                }
+            </script>
+        </div>
+
+    </div>
+</body>
+</html>
