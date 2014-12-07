@@ -2,12 +2,19 @@ var express = require('express')
 var path = require('path')
 var mongoose = require('mongoose')
 var mongoStore = require('connect-mongo')(express)
-var port = process.env.PORT || 8000
+// var port = process.env.PORT || 8000
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1"
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8000
 var app = express()
 var fs = require('fs')
 var dbUrl = 'mongodb://localhost/webdb'
+// var dbUrl = 'mongodb://' + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ':' +
+//     process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+//     process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+//     process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+//     process.env.OPENSHIFT_APP_NAME;
+// mongoose.connect(dbUrl)
 
-mongoose.connect(dbUrl)
 
 // models loading
 var models_path = __dirname + '/app/models'
@@ -35,7 +42,7 @@ app.use(express.bodyParser())
 app.use(express.cookieParser())
 app.use(express.multipart())
 app.use(express.session({
-  secret: 'imooc',
+  secret: 'zsyqq',
   store: new mongoStore({
     url: dbUrl,
     collection: 'sessions'
@@ -51,9 +58,10 @@ if ('development' === app.get('env')) {
 
 require('./config/routes')(app)
 
+// app.listen(port, ipaddress)
 app.listen(port)
 app.locals.moment = require('moment')
 app.use(express.static(path.join(__dirname, 'public')))
 
-console.log('imooc started on port ' + port)
+console.log('cs5610 started on port ' + port)
 
