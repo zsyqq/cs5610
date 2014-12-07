@@ -101,12 +101,24 @@
             <h3>Demo</h3>
             <p class="lead">This web aplication has been deployed at <mark>openshift</mark> server side</p>
             <p>
-                <a href="http://mongodb-zsyqq.rhcloud.com/admin/movie"><h3>Demo Page Link</h3></a>
+                <a href="http://cs5610-zsyqq.rhcloud.com/" target="_blank"><h3>Demo Page Link</h3></a>
+                <a href="https://github.com/zsyqq/cs5610.git" target='_blank'><h3>View Source On Github</h3></a>
             </p>
         </div>
         <br>
         <p>
             <mark><h1><strong>Guide : </strong></h1></mark>
+            <p>Administor User : </p>
+            <p>Username : zsy ; Password: zsy</p>
+            <p>Normal User 1: </p>
+            <p>Username : aa ; Password: aa</p>
+            <p>Normal User 2: </p>
+            <p>Username : bb ; Password: bb</p>
+            <p>Normal User 3: </p>
+            <p>Username : cc ; Password: cc</p>
+            <p>Normal User 4: </p>
+            <p>Username : dd ; Password: dd</p>
+
         </p>
         
       
@@ -141,6 +153,34 @@
                        
                     </a>
                     <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Third Party API</h4>
+                        <p class="list-group-item-text">
+                           YouTube Data API (v3):
+                           <p>jQuery getJSON to retrieve data and formatted the data.</p>
+                           <p>How to use? </p>
+                            <p>REQUEST : "https://www.googleapis.com/youtube/v3/videos"</p>
+                            <P>Retrieve data and formatted: </P>
+                            <pre>
+$.getJSON("https://www.googleapis.com/youtube/v3/videos", {
+          key: "AIzaSyD9kAseErgb-EmLm5HHO0tXLgh9VGGnC5c",
+          part: "snippet,statistics",
+          id: videoid
+        }, function(data) {
+         
+          $('#inputTitle').val(data.items[0].snippet.title)
+         
+          $('#inputPoster').val(data.items[0].snippet.thumbnails.medium.url.replace("https","http"))
+          $('#inputYear').val(data.items[0].snippet.publishedAt)
+          $('#inputSummary').val(data.items[0].snippet.description)
+          $('#inputFlash').val(videoid)
+          $('#viewRate').val(data.items[0].statistics.viewCount)
+          $('#FavoriteRate').val(data.items[0].statistics.favoriteCount)
+          $('#LikeRate').val(data.items[0].statistics.likeCount)
+          $('#DislikeRate').val(data.items[0].statistics.dislikeCount)                                
+                            </pre>
+                        </p>
+                    </a>
+                    <a href="#" class="list-group-item">
                         <h4 class="list-group-item-heading">Database Design</h4>
                         <p class="list-group-item-text">
                             <img src="ER DATABASE - New Page.png" height="647" width="900" alt="DB">
@@ -163,7 +203,7 @@
                     </a>
                      <a href="#" class="list-group-item">
                         <h4 class="list-group-item-heading">MVC Framework --> File Layout</h4>
-                        <strong>Front End Design</strong>
+                        
                         <p class="text-center"><img src="file layout.png" height="645" width="900" alt="front-end-design.png"></p>
                        
 
@@ -242,7 +282,13 @@
 
 
                 </dl>
-
+                <dl class="dl-horizontal">
+                <dt class="text-success lead">Future Work</dt>
+                <dd>1. Administor page : add statistical analysis based on the course video feedback by users.</dd>
+                <dd>2. Form table validation check</dd>
+                <dd>3. Beautify front-end page design</dd>
+                    
+                </dl>
 
 </div>
        
@@ -260,7 +306,17 @@
                         <li><a href="http://www.w3schools.com/">W3C School</a></li>
                         <li><a href="http://bower.io/docs/api/#list">Bower</a></li>
                         <li><a href="http://en.wikipedia.org/wiki/MongoDB">MongoDB WiKi</a></li>
+                        <li><a href="https://developers.google.com/youtube/v3/">YouTube API </a></li>
+                        <li><a href="http://tympanus.net/codrops/">MIT Web Design Tutorial</a></li>
                         <li><a href="http://en.wikipedia.org/wiki/Node.js">moment.js</a></li>
+                        <li><a href="http://expressjs.com/">Express</a></li>
+                        <li><a href="http://nodejs.org/api/">NodeJS</a></li>
+                        <li><a href="https://github.com/learnboost/mongoose">Mongose Doc</a></li>
+                        <li><a href="http://jade-lang.com/">Jade</a></li>
+                        
+
+
+
                     </ul>
                 </div>
             </div>
