@@ -132,7 +132,7 @@
 	text-indent: -9000px;
 	width: 49px;
 	height: 42px;
-	background: transparent url(../images/arrow.png) no-repeat center center;
+	background: transparent url(../img/arrow.png) no-repeat center center;
 	position: absolute;
 	top: 22px;
 	left: 200px;
@@ -158,70 +158,7 @@
 	font-family: Arial;
 	text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
 }
-/* Main Items */
-/*.cn-slide nav a[href="#slide-1"]{
-	background-image: url(../images/1.jpg);
-}
-.cn-slide nav a[href="#slide-2"]{
-	background-image: url(../images/2.jpg);
-}
-.cn-slide nav a[href="#slide-3"]{
-	background-image: url(../images/3.jpg);
-}
-*/
-/* Items and sub-items of slide 1*/
-/*.cn-slide nav a[href="#slide-1-1"],
-#slide-1-1 .cn-content {
-	background-image: url(../images/4.jpg);
-}
-.cn-slide nav a[href="#slide-1-2"],
-#slide-1-2 .cn-content {
-	background-image: url(../images/5.jpg);
-}
-.cn-slide nav a[href="#slide-1-3"],
-#slide-1-3 .cn-content {
-	background-image: url(../images/6.jpg);
-}
-.cn-slide nav a[href="#slide-1-4"],
-#slide-1-4 .cn-content {
-	background-image: url(../images/7.jpg);
-}*/
 
-/* Items and sub-items of slide 2*/
-/*.cn-slide nav a[href="#slide-2-1"],
-#slide-2-1 .cn-content {
-	background-image: url(../images/8.jpg);
-}
-.cn-slide nav a[href="#slide-2-2"],
-#slide-2-2 .cn-content {
-	background-image: url(../images/9.jpg);
-}
-.cn-slide nav a[href="#slide-2-3"],
-#slide-2-3 .cn-content {
-	background-image: url(../images/10.jpg);
-}
-.cn-slide nav a[href="#slide-2-4"],
-#slide-2-4 .cn-content {
-	background-image: url(../images/11.jpg);
-}
-*/
-/* Items and sub-items of slide 3*/
-/*.cn-slide nav a[href="#slide-3-1"],
-#slide-3-1 .cn-content {
-	background-image: url(../images/12.jpg);
-}
-.cn-slide nav a[href="#slide-3-2"],
-#slide-3-2 .cn-content {
-	background-image: url(../images/13.jpg);
-}
-.cn-slide nav a[href="#slide-3-3"],
-#slide-3-3 .cn-content {
-	background-image: url(../images/14.jpg);
-}
-.cn-slide nav a[href="#slide-3-4"],
-#slide-3-4 .cn-content {
-	background-image: url(../images/15.jpg);
-}*/
 @media screen and (max-width: 1060px){
 	.cn-slide-sub nav a{
 		font-size: 1px;

@@ -58,7 +58,16 @@ exports.infosave = function(req,res){
 
   }
   
+exports.adminPage=function(req,res){
+  var id = req.params.id
+  User.findById(id, function(err,user){
+    res.render('adminhome',{
+    title: 'Instructor Page',
+    user:user
+  })
+  })
 
+}
 
 // signup
 exports.showSignup = function(req, res) {
@@ -239,3 +248,22 @@ exports.adminRequired = function(req, res, next) {
 
   next()
 }
+
+
+exports.del = function(req, res) {
+  var id = req.query.id
+
+  if (id) {
+    User.remove({_id: id}, function(err, user) {
+      if (err) {
+        console.log(err)
+        res.json({success: 0})
+      }
+      else {
+        res.json({success: 1})
+      }
+    })
+  }
+}
+
+

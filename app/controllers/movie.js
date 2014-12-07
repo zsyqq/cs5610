@@ -23,6 +23,7 @@ exports.detail = function(req, res) {
       .populate('from', 'name poster intro')
       .populate('reply.from reply.to', 'name poster')
       .exec(function(err, comments) {
+        console.log(comments);
         res.render('detail', {
           title: 'Course Detail',
           movie: m,

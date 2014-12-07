@@ -36,3 +36,24 @@ exports.list = function(req, res) {
     })
   })
 }
+
+exports.del = function(req, res) {
+  var id = req.query.id
+
+  if (id) {
+    Category.findById(id, function(err,cat){
+      if (cat.movies.length <= 0){
+        Category.remove({_id: id}, function(err, cat) {
+          if (err) {
+            console.log(err)
+            res.json({success: 0})
+          }
+          else {
+            res.json({success: 1})
+      }
+    })
+      }
+    })
+    
+  }
+}

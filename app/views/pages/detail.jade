@@ -3,33 +3,47 @@ extends ../layout
 block content
   .container
     .row
-      .col-md-7
+      .col-md-7(style="box-shadow: 0 0 5px 2px rgba(0,0,0,.35)")
         //- embed(src="#{movie.flash}", allowFullScreen="true", quality="high", width="720", height="600", align="middle", allowScriptAcess="always", type="application/x-shockwave-flash")
-        #video(data-vflash='#{movie.flash}')
+        #video.pull-left(data-vflash='#{movie.flash}')
         .panel.panel-defatul
           .panel-heading
             h3 Comment
+            span.pull-right
+              if user
+                if movie.belike.indexOf(user._id)<0
+                  img.like( src='/img/icons/hand30.png',height='30',width='30',data-id="#{movie._id}", data-user="#{user._id}")  
+                    
+                  img.unlike(src='/img/icons/hand29.png',height='30',width='30',type="button", data-id="#{movie._id}", data-user="#{user._id}",style='display:none') 
+                    
+                else
+                  img.unlike(type="button", data-id="#{movie._id}", data-user="#{user._id}",src='/img/icons/hand29.png',height='30',width='30') 
+                   
+                  img.like(type="button", data-id="#{movie._id}", data-user="#{user._id}",style='display:none',src='/img/icons/hand30.png',height='30',width='30') 
+              else 
+                a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
           .panel-body
             ul.media-list
               each item in comments
                 li.media
                   .pull-left
                     a.comment(href="#comments", data-cid="#{item._id}", data-tid="#{item.from._id}")
-                      img.media-object(src="/img/#{item.from.poster}", style="width: 64px; height: 64px;")
-                      p #{item.from.intro}
+                      img.media-object(src="/upload/#{item.from.poster}", style="width: 64px; height: 64px;")
+                      
                   .media-body
-                    h4.media-heading #{item.from.name}
+                    a(href='/user/#{item.from._id}')
+                      h4.media-heading #{item.from.name}
                     p #{item.content}
                     if item.reply && item.reply.length > 0
                       each reply in item.reply
                         .media
                           .pull-left
                             a.comment(href="#comments", data-cid="#{item._id}", data-tid="#{reply.from._id}")
-                              img.media-object(src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+", style="width: 64px; height: 64px;")
-                              p #{reply.from.name}
-                         .media-body
+                              img.media-object(src="/upload/#{reply.from.poster}", style="width: 64px; height: 64px;")
+
+                          .media-body
                             h4.media-heading
-                              | #{reply.from.name}
+                              a.comment(href='/user/#{reply.from._id}') #{reply.from.name}
                               span.text-info &nbsp;reply&nbsp;
                               | #{reply.to.name}:
                             p #{reply.content}
@@ -47,30 +61,11 @@ block content
                   a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
       .col-md-5
         .dl-horizontal
-          if user
-            if movie.belike.indexOf(user._id)<0
-              button.like(type="button", data-id="#{movie._id}", data-user="#{user._id}") Like
-              button.unlike(type="button", data-id="#{movie._id}", data-user="#{user._id}",style='display:none') Unlike
-            else
-              button.unlike(type="button", data-id="#{movie._id}", data-user="#{user._id}") Unlike
-              button.like(type="button", data-id="#{movie._id}", data-user="#{user._id}",style='display:none') Like
-
-          else 
-            a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Require Login
          
-          
-          br 
- 
+
       
           dt Course Name
           dd= movie.title
-
-          //- dt Instructor
-          //- dd= movie.doctor
-          //- dt Country
-          //- dd= movie.country
-          //- dt Language
-          //- dd= movie.language
           dt Create Year
           dd= movie.year
           dt Introduction
@@ -83,6 +78,10 @@ block content
           dd=movie.likerate
           dt dislike on youtube
           dd=movie.dislrate
+          br 
+          br 
+          br 
+
   script(src="/build/detail.min.js")
   script.
 
@@ -100,7 +99,7 @@ block content
         swfobject.embedSWF(
           "http://www.youtube.com/v/"+ videoid+"?enablejsapi=1&rel=0&fs=1",
           "video",
-          "600",
+          "550",
           "500",
           "10.1",
           false,

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose')
 var Movie = mongoose.model('Movie')
 var Category = mongoose.model('Category')
+var User = mongoose.model('User')
 
 // index page
 exports.index = function(req, res) {
@@ -20,12 +21,18 @@ exports.index = function(req, res) {
         if (err){console.log(err);}
 
         Movie.find().sort({pv:-1}).exec(function(err,pvmovies){
+          User.find().sort({pv:-1}).exec(function(err,users){
+            console.log(users);
             res.render('demo', {
             title: 'Web Development Learning',
             categories: categories, 
             movies:movies, 
-            pvmvs : pvmovies
+            pvmvs : pvmovies, 
+            pvusers : users,
       })
+
+          })
+      
 
         })
       
@@ -58,6 +65,7 @@ exports.search = function(req, res) {
         var category = categories[0] || {}
         var movies = category.movies || []
         var results = movies.slice(index, index + count)
+        console.log('result page!!');
 
         res.render('results', {
           title: 'Search Result',

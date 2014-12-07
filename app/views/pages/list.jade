@@ -10,9 +10,9 @@ block content
             th course name
             //- th channelTitle
             
-            th create year
+            th create time
             th modified time
-            th pv
+            th visitors
             th lookup
             th edit
             th delete
@@ -23,11 +23,18 @@ block content
               td #{item.title}
               //- td #{item.doctor}
               
-              td #{item.year}
-              td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+              td #{moment(item.meta.createAt).format('MMMM Do YYYY, h:mm:ss a')}
+              td #{moment(item.meta.updateAt).format('MMMM Do YYYY, h:mm:ss a')}
               td #{item.pv}
               td: a(target="_blank", href="/movie/#{item._id}") lookup
               td: a(target="_blank", href="/admin/movie/update/#{item._id}") edit
               td
                 button.btn.btn-danger.del(type="button", data-id="#{item._id}") delete
+      button.btn.btn-default(type='button',href='/admin/movie/new') 
+        a(href='/admin/movie/new') Create New  
+      br 
+      br 
+      br 
+      br 
+       
   script(src="/js/admin.js")

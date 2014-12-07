@@ -77,14 +77,18 @@ html.demo-7(lang="en")
                 if user._id != to._id
                   if f.indexOf(user._id)<0
                     //- button.like(type="button", data-fid="#{to._id}", data-user="#{user._id}")
-                    img.like(src='/img/icons/neutral.png',height='30',width='30',data-fid="#{to._id}", data-user="#{user._id}")
+                    img.like(src='/img/icons/hand29.png',height='30',width='30',data-fid="#{to._id}", data-user="#{user._id}")
+                   
                     //- button.unlike(type="button", data-fid="#{to._id}", data-user="#{user._id}",style='display:none')
-                    img.unlike(src='/img/icons/happy6.png',height='30',width='30',data-fid="#{to._id}", data-user="#{user._id}",style='display:none')
+                    img.unlike(src='/img/icons/hand30.png',height='30',width='30',data-fid="#{to._id}", data-user="#{user._id}",style='display:none')
+                    
                   else
                     //- button.unlike(type="button", data-fid="#{to._id}", data-user="#{user._id}") 
-                    img.unlike(src='/img/icons/happy6.png',height='30',width='30', data-fid="#{to._id}", data-user="#{user._id}")
+                    img.unlike(src='/img/icons/hand30.png',height='30',width='30', data-fid="#{to._id}", data-user="#{user._id}")
+                   
                     //- button.like(type="button", data-fid="#{to._id}", data-user="#{user._id}",style='display:none') 
-                    img(src='/img/icons/neutral.png',height='30',width='30',data-fid="#{to._id}", data-user="#{user._id}",style='display:none')
+                    img.like(src='/img/icons/hand29.png',height='30',width='30',data-fid="#{to._id}", data-user="#{user._id}",style='display:none')
+                    
                 else 
                   h4 Welccome you 
               
@@ -189,8 +193,10 @@ html.demo-7(lang="en")
     .morph-button.morph-button-sidebar.morph-button-fixed
       if user
         if user.role>50 
-          button(type="button")
+          button(type="button") 
             img(src='/img/icons/cogwheel9.png',height='30',weight='30') 
+
+
 
         
           
@@ -202,23 +208,15 @@ html.demo-7(lang="en")
               h2 Settings
               ul
                 li
-                  a.icon(href="#") Default filters
+                  a.icon(href="/admin/#{user._id}") Administor Home
                 li
-                  a.icon(href="#") Storage Use
+                  a.icon(href="/admin/movie/new") Upload Course
                 li
-                  a.icon(href="#") Favorites
+                  a.icon(href="/admin/category/new") Create Category
                 li
-                  a.icon(href="#") Readability
-                li
-                  a.icon(href="#") Speech
-                li
-                  a.icon(href="#") Uploads
-                li
-                  a.icon(href="#") Profile
-                li
-                  a.icon(href="#") Documents
-                li
-                  a.icon(href="#") Global Options
+                  a.icon(href="http://www.youtube.com") Youtube
+      
+
   script(src="/js/classie.js")
   script(src="/js/uiMorphingButton_fixed.js")
   script(src="/js/adjs.js")

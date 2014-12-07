@@ -20,7 +20,7 @@ var MovieSchema = new Schema({
   dislrate: Number,
   category: {
     type: ObjectId,
-    ref: 'Category'
+    ref: 'Category', 
   },
 
   meta: {

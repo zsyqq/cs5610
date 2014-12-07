@@ -37,7 +37,7 @@ html(lang="en")
           li
             h2 NodeJS
           li
-            h2 MongoDB
+            h2 Web Learning
           li
             h2 AngularJS
         .bg-img
@@ -69,14 +69,14 @@ html(lang="en")
         .title
     
           h1 Start Learn
-          p.subline Inspiration for Web Development
+          p.subline Project for Web Development
           p
             | by
             strong Shuyi Zhang
             | &#8212; Posted in
-            strong Inspiration
+            strong Openshift
             | on
-            strong May 21, 2014
+            strong DEC 6, 2014
           p
             a.current-demo(href="#slide-main") Course Menu
       button.trigger(data-info="Click to see more")
@@ -115,31 +115,28 @@ html(lang="en")
                 a.cn-back(href="#slide-#{cat.name}") Back
                 .cn-content(style="background:#80B8CE url(#{mv.poster}) no-repeat center center")
                   p #{mv.summary}
+                  hr
+                  if user 
+                    a(href='/movie/#{mv._id}') Watch Course Video
+                  else 
+                    p Watch Course Video? login first !
+
 
       include ../includes/header
+
       #morphsearch.morphsearch
         form.morphsearch-form(method='GET',action="/results")
           input.morphsearch-input(type="text", placeholder="Search...",name='q')
-          button#search-btn.morphsearch-submit(type="submit") Search
+          button.morphsearch-submit(type="submit") Search
         .morphsearch-content
           .dummy-column
-            h2 Skills
-            a.dummy-media-object(href="https://developer.mozilla.org/en-US/docs/Web/JavaScript",target='_blank')
-              h3 Javascript Doc
-            a.dummy-media-object(href="http://jquery.com/",target='_blank')
-              h3 jQuery Doc
-            a.dummy-media-object(href="http://nodejs.org/",target='_blank')
-              img.round(src="http://0.gravatar.com/avatar/06458359cb9e370d7c15bf6329e5facb?s=50&d=identicon&r=G", alt="Peter Finlan")
-              h3 NodeJS
-            a.dummy-media-object(href="http://www.mongodb.com/",target='_blank')
-              img.round(src="http://1.gravatar.com/avatar/db7700c89ae12f7d98827642b30c879f?s=50&d=identicon&r=G", alt="Patrick Cox")
-              h3 MongoDB
-            a.dummy-media-object(href="https://angularjs.org/",target='_blank')
-              img.round(src="http://0.gravatar.com/avatar/cb947f0ebdde8d0f973741b366a51ed6?s=50&d=identicon&r=G", alt="Tim Holman")
-              h3 AngularJS
-            a.dummy-media-object(href="http://www.w3schools.com",target='_blank')
-              img.round(src="http://1.gravatar.com/avatar/9bc7250110c667cd35c0826059b81b75?s=50&d=identicon&r=G", alt="Shaun Dona")
-              h3 w3schools
+            h2 Popular Users
+            each user in pvusers               
+              a.dummy-media-object(href="/user/#{user._id}",target='_blank')
+                
+                img.round(src='/upload/#{user.poster}') 
+                h3 #{user.name}
+
           .dummy-column
             h2 Recent
             each mv in movies
@@ -154,11 +151,7 @@ html(lang="en")
                 h3 #{pvmv.title}
 
         span.morphsearch-close
-    form(method='GET', action='/results')
-      .input-group.col-sm-4.pull-right
-        input.form-control(type='text', name='q')
-        span.input-group-btn
-          button#search-btn.btn.btn-default(type='submit') Search
+    
    
     script(src="/js/search.js")
     script(src="/js/classie.js")

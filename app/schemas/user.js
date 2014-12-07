@@ -45,8 +45,8 @@ UserSchema.pre('save', function(next) {
   else {
     this.meta.updateAt = Date.now()
   }
-
-  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+  if (user.password.length<15){
+     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
     if (err) return next(err)
 
     bcrypt.hash(user.password, salt, function(err, hash) {
@@ -56,6 +56,15 @@ UserSchema.pre('save', function(next) {
       next()
     })
   })
+
+
+  }
+  else
+  {
+    next()
+  }
+
+ 
 })
 
 UserSchema.methods = {

@@ -39,7 +39,7 @@ $(function() {
           $('#inputTitle').val(data.items[0].snippet.title)
           // $('#inputDoctor').val(data.items[0].snippet.channelTitle)
           // $('#inputCountry').val(data.countries[0])
-          $('#inputPoster').val(data.items[0].snippet.thumbnails.medium.url)
+          $('#inputPoster').val(data.items[0].snippet.thumbnails.medium.url.replace("https","http"))
           $('#inputYear').val(data.items[0].snippet.publishedAt)
           $('#inputSummary').val(data.items[0].snippet.description)
           $('#inputFlash').val(videoid)

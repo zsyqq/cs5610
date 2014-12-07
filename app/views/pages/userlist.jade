@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  .container
+  .container(style='background:url(/images/bg.jpg)')
     .row
       table.table.table-hover.table-bordered
         thead
@@ -9,15 +9,39 @@ block content
             th Name
             th Time
             th Lookup
-            th Edit
+      
             th Delete
         tbody
           each item in users
             tr(class="item-id-#{item._id}")
               td #{item.name}
-              td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
-              td: a(target="_blank", href="../movie/#{item._id}") Lookup
-              td: a(target="_blank", href="../admin/update/#{item._id}") Edit
-              td
-                button.btn.btn-danger.del(type="button", data-id="#{item._id}") Delete
-  //- script(src="/js/admin.js")
+              td #{moment(item.meta.updateAt).format('MMMM Do YYYY, h:mm:ss a')}
+              td: a(target="_blank", href="/user/#{item._id}") Lookup
+              
+              if item.role < 50
+                td
+                  button.btn.btn-danger.del(type="button", data-id="#{item._id}") Delete
+              else 
+                td 
+                  p Administor
+  script.
+    $(function() {
+      $('.del').click(function(e) {
+        var target = $(e.target)
+        var id = target.data('id')
+        var tr = $('.item-id-' + id)
+        console.log('delete')
+
+        $.ajax({
+          type: 'DELETE',
+          url: '/admin/user/list?id=' + id
+        })
+        .done(function(results) {
+          if (results.success === 1) {
+            if (tr.length > 0) {
+              tr.remove()
+            }
+          }
+        })
+      })
+      })();

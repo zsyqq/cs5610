@@ -7,7 +7,7 @@ block content
         .form-group
           label.col-sm-2.control-label Sycrynizse
           .col-sm-10
-            input#search-txt.form-control(type="text")
+            input#search-txt.form-control(type="text",placeholder='eg : cLvpJY2deo or http://www.youtube.com/watch?v=_cLvpJY2deo')
           .col-sm-2
             input#search-btn(type='button' value='Fetch Video Information')
         if movie._id
@@ -15,7 +15,7 @@ block content
         .form-group
           label.col-sm-2.control-label(for="inputCategory") Course Category
           .col-sm-10
-            input#inputCategory.form-control(type="text", name="movie[categoryName]", value=movie.categoryName)
+            input#inputCategory.form-control(type="text", name="movie[categoryName]", value=movie.categoryName,placeholder=' Required enter if no match below')
         .form-group
           label.col-sm-2.control-label Category Select
           each cat in categories
@@ -91,4 +91,9 @@ block content
         .form-group
           .col-sm-offset-2.col-sm-10
           button.btn.btn-default(type="submit") Upload
+          br 
+          br 
+          br 
+          br 
+
   script(src='/js/admin.js')

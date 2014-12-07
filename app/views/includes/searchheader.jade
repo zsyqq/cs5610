@@ -11,19 +11,23 @@
             span.input-group-btn
               button.btn.btn-default(type='submit') Search
     .navbar.navbar-default.navbar-fixed-bottom
-      .container
-        .navbar-header
-          a.navbar-brand(href="/") Web Development Learning
-        if user
-          p.navbar-text.navbar-right
+      if user
+       
+        div(style="float:right;padding-right:15px")
+          a(href="/")
+            span Home
+          span &nbsp;|&nbsp;
+          a(href="/user/#{user._id}")
             span Welcome,#{user.name}
-            span &nbsp;|&nbsp;
-            a.navbar-link(href="/logout") Logout
-        else
-          p.navbar-text.navbar-right
-            a.navbar-link(href="#", data-toggle="modal", data-target="#signupModal") Sign up
-            span &nbsp;|&nbsp;
-            a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Login
+          span &nbsp;|&nbsp;
+          a.navbar-link(href="/logout") Logout
+  
+
+      else
+        p.navbar-text.navbar-right
+          a.navbar-link(href="#", data-toggle="modal", data-target="#signupModal") Sign up
+          span &nbsp;|&nbsp;
+          a.navbar-link(href="#", data-toggle="modal", data-target="#signinModal") Login
     #signupModal.modal.fade
       .modal-dialog
         .modal-content

@@ -29,6 +29,7 @@ module.exports = function(app) {
   app.get('/signup', User.showSignup)
   app.get('/logout', User.logout)
   app.get('/admin/user/list', User.signinRequired, User.adminRequired, User.list)
+  app.delete('/admin/user/list', User.signinRequired, User.adminRequired, User.del)
 
   // Movie
   app.get('/movie/:id', Movie.detail)
@@ -37,10 +38,12 @@ module.exports = function(app) {
   app.post('/admin/movie', User.signinRequired, User.adminRequired, Movie.savePoster, Movie.save)
   app.get('/admin/movie/list', User.signinRequired, User.adminRequired, Movie.list)
   app.delete('/admin/movie/list', User.signinRequired, User.adminRequired, Movie.del)
+
   app.post('/movie/like/:id',User.signinRequired,Favmv.favmv)
   app.post('/movie/unlike/:id',User.signinRequired,Favmv.unlike)
   // app.get('/user/edit/:id', User.signinRequired, User.edit)
   app.post('/user/edit', User.signinRequired, User.savePhoto, User.infosave)
+  app.get('/admin/:id',User.signinRequired,User.adminRequired,User.adminPage)
 
 
 
@@ -51,12 +54,13 @@ module.exports = function(app) {
   app.get('/admin/category/new', User.signinRequired, User.adminRequired, Category.new)
   app.post('/admin/category', User.signinRequired, User.adminRequired, Category.save)
   app.get('/admin/category/list', User.signinRequired, User.adminRequired, Category.list)
+  app.delete('/admin/category/list', User.signinRequired, User.adminRequired, Category.del)
   
   //follow
   app.post('/user/follow/:id',User.signinRequired, Follow.like)
   app.post('/user/unfollow/:id',User.signinRequired, Follow.unlike)
   // results
-  app.get('/results', Index.index)
+  app.get('/results', Index.search)
 }
 
 
