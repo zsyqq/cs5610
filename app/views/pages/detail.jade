@@ -5,8 +5,10 @@ block content
     .row
       .col-md-7(style="box-shadow: 0 0 5px 2px rgba(0,0,0,.35)")
         //- embed(src="#{movie.flash}", allowFullScreen="true", quality="high", width="720", height="600", align="middle", allowScriptAcess="always", type="application/x-shockwave-flash")
-        .video-container       
-          #video.pull-left(data-vflash='#{movie.flash}')
+        //- .video-container       
+        //-   #video.pull-left(data-vflash='#{movie.flash}')
+        .video-container
+          iframe#video(src = '', data-vflash='#{movie.flash}',height="315" width="560" allowfullscreen="" frameborder="0")
         .panel.panel-defatul
           .panel-heading
             h3 Comment
@@ -67,8 +69,8 @@ block content
       
           dt Course Name
           dd= movie.title
-          dt Create Year
-          dd= movie.year
+          dt Publish Time on youtube
+          dd= moment(movie.year).format('MMMM Do YYYY, h:mm:ss a')
           dt Introduction
           dd= movie.summary
           dt Viewers on youtube
@@ -93,21 +95,24 @@ block content
         if (matches) {
           videoid = matches[1];
         }
+        var v = 'http://www.youtube.com/embed/'+ videoid
+        target.attr('src',v)
+        //- target.src='http://www.youtube.com/embed/'+ videoid
         //- if (videoid.match(/^[a-z0-9_-]{11}$/i) === null) {
         //-   $("<p style='color: #F00;'>Unable to parse Video ID/URL.</p>").appendTo("#video-data-1");
         //-   return;
         //- }
-        swfobject.embedSWF(
-          "http://www.youtube.com/v/"+ videoid+"?enablejsapi=1&rel=0&fs=1",
-          "video",
-          "100%",
-          "400",
-          "10.1",
-          false,
-          false,
-          { allowScriptAccess: "always", allowFullScreen: "true" },
-          { id: "video" }
-        )
+        //- swfobject.embedSWF(
+        //-   "http://www.youtube.com/v/"+ videoid+"?enablejsapi=1&rel=0&fs=1",
+        //-   "video",
+        //-   "100%",
+        //-   "400",
+        //-   "10.1",
+        //-   false,
+        //-   false,
+        //-   { allowScriptAccess: "always", allowFullScreen: "true" },
+        //-   { id: "video" }
+        //- )
         $('.like').click(function(e){
           var target = $(e.target)
           var id = target.data('id')
