@@ -25,6 +25,7 @@ block content
               else
                 input(type="radio", name="movie[category]", value=cat._id)
               | #{cat.name}
+          span(style='color:red') &nbsp;&nbsp;&nbsp;require select or enter category
         .form-group
           label.col-sm-2.control-label(for="inputTitle") Course Name
           .col-sm-10

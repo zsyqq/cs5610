@@ -1,3 +1,5 @@
+link(rel="stylesheet", type="text/css", href="/css/header.css")
+
 .navbar.navbar-default.navbar-fixed-bottom
   if user
    
@@ -24,10 +26,12 @@
         .modal-body
           .form-group
             label(for="signupName") Account
-            input#signupName.form-control(name="user[name]", type="text")
+            input#signupName.form-control(name="user[name]", type="text",required)
+            p Required
           .form-group
             label(for="signupPassword") Password
-            input#signupPassword.form-control(name="user[password]", type="text")
+            input#signupPassword.form-control(name="user[password]", type="text",required)
+            p Required
         .modal-footer
           button.btn.btn-default(type="button", data-dismiss="modal") Close
           button.btn.btn-success(type="submit") Submit
@@ -39,10 +43,12 @@
         .modal-body
           .form-group
             label(for="signinName") Account
-            input#signinName.form-control(name="user[name]", type="text")
+            input#signinName.form-control(name="user[name]", type="text",required)
+            p Required
           .form-group
             label(for="signinPassword") Password
-            input#signinPassword.form-control(name="user[password]", type="text")
+            input#signinPassword.form-control(name="user[password]", type="text",required)
+            p Required
         .modal-footer
           button.btn.btn-default(type="button", data-dismiss="modal") Close
           button.btn.btn-success(type="submit") Submit

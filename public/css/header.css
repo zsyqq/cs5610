@@ -1,0 +1,44 @@
+
+
+input#signupName:required:invalid, input:focus:invalid {
+	 background-image: url(/img/icons/invalid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+input#signupName:required:valid {
+	background-image: url(/img/icons/valid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+input#signupPassword:required:invalid, input:focus:invalid {
+	 background-image: url(/img/icons/invalid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+input#signupPassword:required:valid {
+	background-image: url(/img/icons/valid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+input#signinName:required:invalid, input:focus:invalid {
+	 background-image: url(/img/icons/invalid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+input#signinName:required:valid {
+	background-image: url(/img/icons/valid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+input#signinPassword:required:invalid, input:focus:invalid {
+	 background-image: url(/img/icons/invalid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+input#signinPassword:required:valid {
+	background-image: url(/img/icons/valid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+}

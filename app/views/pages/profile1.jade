@@ -208,13 +208,18 @@ html.demo-7(lang="en")
               h2 Settings
               ul
                 li
-                  a.icon(href="/admin/#{user._id}") Administor Home
+                  a.icon(href="/admin/#{user._id}") Administor Home(not on mobile)
                 li
                   a.icon(href="/admin/movie/new") Upload Course
                 li
                   a.icon(href="/admin/category/new") Create Category
                 li
-                  a.icon(href="http://www.youtube.com") Youtube
+                  a.icon(href="/admin/category/list") View Categories
+                li
+                  a.icon(href="/admin/movie/list") View Courses
+                li
+                  a.icon(href="/admin/user/list") View Users
+
       
 
   script(src="/js/classie.js")
